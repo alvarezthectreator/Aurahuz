@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurahuz — Essence in its purest form</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0c0a;
+    --cream:#f6f1e7;
+    --gold:#c9a24a;
+    --gold-light:#e6cd8f;
+    --gold-dim:#a9863a;
+    --stone:#8a8378;
+  }
+  body{ margin:0; font-family:'Jost', sans-serif; }
+  .font-serif-display{ font-family:'Cormorant Garamond', serif; }
+  .tracked{ letter-spacing:.18em; }
+  .tracked-sm{ letter-spacing:.12em; }
+  .divider-flourish::after{
+    content:"";
+    display:block;
+    width:56px;
+    height:1px;
+    background:var(--gold);
+    margin:14px auto 0;
+  }
+  .gold-btn{
+    background: linear-gradient(180deg,var(--gold-light),var(--gold-dim));
+    color:#241c0c;
+  }
+  .bottle-shadow{ filter: drop-shadow(0 30px 40px rgba(0,0,0,.55)); }
+</style>
+</head>
+<body class="bg-[var(--cream)] text-[var(--ink)]">
+
+<!-- ============ OUTER FRAME ============ -->
+<div class="min-h-screen p-0 md:p-0">
+<div class="bg-[var(--ink)] overflow-hidden">
+
+  <!-- ============ HEADER ============ -->
+  <header class="bg-[#0c0a08] border-b border-white/10">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between px-8 md:px-12 py-6">
+      <div class="font-serif-display tracked text-2xl md:text-[26px] text-[var(--gold-light)]">AURAHUZ</div>
+
+      <nav class="hidden lg:flex items-center gap-10 text-[12px] tracked-sm text-stone-200">
+        <a href="#" class="pb-2 border-b border-[var(--gold)] text-white">HOME</a>
+        <a href="#collection" class="hover:text-white transition-colors">COLLECTION</a>
+        <a href="#" class="hover:text-white transition-colors">OUR STORY</a>
+        <a href="#" class="hover:text-white transition-colors">INGREDIENTS</a>
+        <a href="#" class="hover:text-white transition-colors">JOURNAL</a>
+        <a href="#" class="hover:text-white transition-colors">CONTACT</a>
+      </nav>
+
+      <div class="flex items-center gap-5">
+        <button aria-label="Search" class="text-stone-200 hover:text-white transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <button aria-label="Account" class="text-stone-200 hover:text-white transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+        </button>
+        <button aria-label="Bag" class="text-stone-200 hover:text-white transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        </button>
+        <a href="#" class="gold-btn hidden sm:inline-block text-[11px] tracked-sm font-medium px-6 py-3">SHOP NOW</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="relative overflow-hidden min-h-[620px] md:min-h-[700px] bg-[#0c0a08]">
+    <div class="absolute inset-0 z-0" style="background-image:url('Create_gold_necklace_hero_section_2K_20260913173539.jpeg'); background-size:cover; background-position:center center;"></div>
+    <div class="absolute inset-0 z-10" style="background:linear-gradient(90deg, rgba(12,10,8,0.72) 0%, rgba(12,10,8,0.45) 28%, rgba(12,10,8,0.2) 55%, rgba(12,10,8,0.5) 100%);"></div>
+
+    <div class="relative z-20 max-w-[1440px] mx-auto grid lg:grid-cols-[1.2fr_0.8fr] items-center gap-6 px-8 md:px-12 py-16 md:py-20 min-h-[620px] md:min-h-[700px]">
+      <!-- Left copy -->
+      <div class="relative z-10 max-w-[560px]">
+        <p class="tracked-sm text-[12px] text-[var(--gold)] mb-6">DISCOVER THE COLLECTION</p>
+        <h1 class="font-serif-display text-[56px] md:text-[68px] leading-[0.98] text-[#f3ede0]">
+          Essence in<br>
+          <span class="italic text-[var(--gold-light)] font-normal">its purest form.</span>
+        </h1>
+        <p class="mt-7 max-w-sm text-[15px] leading-relaxed text-stone-300/90">
+          Each fragrance is a story—crafted with rare ingredients, balanced with intention, and designed to leave a lasting impression.
+        </p>
+        <a href="#collection" class="gold-btn inline-block mt-9 text-[12px] tracked-sm font-medium px-8 py-4">
+          EXPLORE THE COLLECTION
+        </a>
+
+        <div class="flex items-center gap-6 mt-14 text-[13px] tracked-sm">
+          <span class="text-white border-b border-[var(--gold)] pb-1">01</span>
+          <span class="text-[var(--gold)] border-b border-[var(--gold)] pb-1">02</span>
+          <span class="text-stone-500">03</span>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex justify-end items-start pt-8">
+        <div class="flex flex-col items-end text-right">
+          <p class="tracked-sm text-[12px] text-stone-200 leading-6">DEEP. BOLD.<br>UNFORGETTABLE.</p>
+          <div class="w-10 h-px bg-[var(--gold)] my-4"></div>
+          <p class="font-serif-display text-2xl text-[var(--gold-light)] tracking-widest">AN</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE COLLECTION ============ -->
+  <section id="collection" class="bg-[var(--cream)] py-20 px-8 md:px-12">
+    <div class="max-w-[1440px] mx-auto">
+      <h2 class="font-serif-display text-center text-[34px] tracked-sm text-[#221c12] divider-flourish">THE COLLECTION</h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Woman lace lingerie" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Woman lace lingerie</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_2_w44lwux42l.jpg" alt="3D alien men's slides" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">3D alien men's slides</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 82,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 90,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_6_mkyxtj9t4k.jpg" alt="Automatic rebound ab roller" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Automatic Rebound Ab Roller</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 48,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 55,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_8_7lkf2u199w.jpg" alt="Sunglasses" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Sunglasses</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_4_8t12erdbvw.jpg" alt="Luxury rhinestone body chain" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Luxury Rhinestone Body Chain</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 20,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 25,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-6">
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_3_shbfbfgkft.jpg" alt="Luxe spiral tassel necklace" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Luxe Spiral Tassel Necklace</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 35,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_1_5vukrz8ghq.jpg" alt="Celeste crystal cut-out dress" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Celeste Crystal Cut-Out Dress</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 35,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 40,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_7_hthejwzb8i.jpg" alt="Polarized sunglasses" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Polarized Sunglasses</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_9_tfv3xw6xjf.jpg" alt="Sunglasses" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Sunglasses</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 10,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 15,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
+          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Luxury baroque pearl jewelry" class="h-full w-full object-cover" />
+          </div>
+          <div class="px-4 py-4">
+            <h3 class="text-[14px] font-medium text-[#221c12]">Luxury Baroque Pearl Jewelry</h3>
+            <div class="mt-2 pt-2 border-t border-stone-200">
+              <p class="text-[16px] font-semibold text-[#221c12]">NGN 20,000.00</p>
+              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 25,000.00</p>
+            </div>
+            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+              Add To Cart
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGNATURE NOTES / OUR CRAFT ============ -->
+  <section class="bg-[#0c0a08] grid lg:grid-cols-2">
+
+    <!-- Signature Notes -->
+    <div class="px-8 md:px-12 py-16 border-b lg:border-b-0 lg:border-r border-white/10">
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">THE ART OF COMPOSITION</p>
+      <h2 class="font-serif-display text-[34px] text-[#f3ede0] mt-3">Signature Notes</h2>
+
+      <div class="grid grid-cols-5 gap-3 mt-9">
+        <div class="text-center">
+          <img src="https://placehold.co/160x160/5c6b1e/f0f0e0?text=Bergamot" alt="Bergamot placeholder" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">BERGAMOT</p>
+          <p class="text-[10px] text-stone-500 mt-1">Bright &amp; Uplifting</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/160x160/8a3a4d/f5e6e9?text=Rose" alt="Rose Absolute placeholder" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">ROSE ABSOLUTE</p>
+          <p class="text-[10px] text-stone-500 mt-1">Floral &amp; Romantic</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/160x160/241a10/c9a24a?text=Oud" alt="Oud Wood placeholder" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">OUD WOOD</p>
+          <p class="text-[10px] text-stone-500 mt-1">Rich &amp; Mysterious</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/160x160/8a5518/f5e2c0?text=Amber" alt="Amber placeholder" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">AMBER</p>
+          <p class="text-[10px] text-stone-500 mt-1">Warm &amp; Resinous</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/160x160/7a5030/e9d5b8?text=Sandalwood" alt="Sandalwood placeholder" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">SANDALWOOD</p>
+          <p class="text-[10px] text-stone-500 mt-1">Smooth &amp; Creamy</p>
+        </div>
+      </div>
+
+      <button class="mt-10 border border-[var(--gold-dim)] text-[11px] tracked-sm text-stone-200 px-6 py-3 hover:bg-white/5 transition-colors">
+        VIEW ALL INGREDIENTS
+      </button>
+    </div>
+
+    <!-- Our Craft -->
+    <div class="px-8 md:px-12 py-16 grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="tracked-sm text-[11px] text-[var(--gold)]">OUR CRAFT</p>
+        <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Luxury in Every Detail</h2>
+
+        <div class="mt-9 space-y-7">
+          <div class="flex gap-4">
+            <div class="w-9 h-9 shrink-0 rounded-full border border-[var(--gold-dim)] flex items-center justify-center text-[var(--gold)]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+            </div>
+            <div>
+              <h3 class="tracked-sm text-[12px] text-stone-100">EXPERTLY BLENDED</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Our master perfumers blend rare ingredients to create timeless scents.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-9 h-9 shrink-0 rounded-full border border-[var(--gold-dim)] flex items-center justify-center text-[var(--gold)]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <h3 class="tracked-sm text-[12px] text-stone-100">FINEST INGREDIENTS</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Sourced ethically from around the world for exceptional quality.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-9 h-9 shrink-0 rounded-full border border-[var(--gold-dim)] flex items-center justify-center text-[var(--gold)]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c2 3 3.5 5.5 3.5 8a3.5 3.5 0 1 1-7 0C8.5 8.5 10 6 12 3Z"/></svg>
+            </div>
+            <div>
+              <h3 class="tracked-sm text-[12px] text-stone-100">HANDCRAFTED IN SMALL BATCHES</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Meticulously crafted to ensure perfection in every bottle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-full min-h-[280px] rounded-sm overflow-hidden">
+        <img src="https://placehold.co/600x500/1c1712/c9a24a?text=Perfumer+at+Work"
+             alt="Master perfumer crafting fragrance placeholder" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GIFT + TESTIMONIAL ============ -->
+  <section class="grid lg:grid-cols-2">
+
+    <!-- Gift -->
+    <div class="bg-[var(--cream)] px-8 md:px-12 py-16 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">A GIFT TO REMEMBER</p>
+        <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">The Art of Gifting</h2>
+        <p class="text-[13px] text-stone-600 mt-4 leading-relaxed max-w-xs">
+          Presented in our signature packaging, AURA NOIR is more than a fragrance—it's an unforgettable experience.
+        </p>
+        <button class="mt-8 border border-[#221c12]/40 text-[11px] tracked-sm px-6 py-3 hover:bg-black/5 transition-colors">
+          SHOP GIFT SETS
+        </button>
+      </div>
+      <div class="h-64 rounded-sm overflow-hidden">
+        <img src="https://placehold.co/500x400/cfc1a0/141210?font=playfair-display&text=Gift+Set"
+             alt="Aura Noir gift box placeholder" class="w-full h-full object-cover" />
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="px-8 md:px-12 py-16 flex flex-col justify-center relative" style="background:radial-gradient(120% 100% at 80% 20%, #1c1712, #0c0a08 70%);">
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY CONNOISSEURS</p>
+      <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight max-w-md">
+        Loved by Those Who Appreciate the Exceptional
+      </h2>
+
+      <div class="flex gap-1 mt-6 text-[var(--gold)]">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+
+      <p class="font-serif-display italic text-[19px] text-stone-200 mt-5 max-w-md leading-relaxed">
+        "AURA NOIR is in a league of its own. Every fragrance feels personal, luxurious, and unforgettable."
+      </p>
+      <p class="tracked-sm text-[11px] text-stone-500 mt-4">— SOPHIA L., NEW YORK</p>
+
+      <div class="flex gap-3 mt-10">
+        <button aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER FEATURE BAR ============ -->
+  <section class="bg-[#0c0a08] border-t border-white/10">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 px-8 md:px-12 py-8 text-stone-300">
+
+      <div class="flex items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-[var(--gold)] shrink-0"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        <div>
+          <p class="text-[12px] tracked-sm">COMPLIMENTARY SHIPPING</p>
+          <p class="text-[11px] text-stone-500 mt-1">On all orders over $150</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-[var(--gold)] shrink-0"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <p class="text-[12px] tracked-sm">EASY RETURNS</p>
+          <p class="text-[11px] text-stone-500 mt-1">14-day returns</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-[var(--gold)] shrink-0"><path d="M20.6 12.3 12.3 20.6a2 2 0 0 1-2.8 0l-6-6a2 2 0 0 1 0-2.9L11.8 3.4a2 2 0 0 1 1.5-.6h5a2 2 0 0 1 2 2v5a2 2 0 0 1-.7 1.5Z"/><circle cx="15.5" cy="7.5" r="1.2"/></svg>
+        <div>
+          <p class="text-[12px] tracked-sm">EXCLUSIVE SAMPLES</p>
+          <p class="text-[11px] text-stone-500 mt-1">With every purchase</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-[var(--gold)] shrink-0"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M3 8V6a2 2 0 0 1 2-2h3M21 8V6a2 2 0 0 0-2-2h-3M12 4v4"/></svg>
+        <div>
+          <p class="text-[12px] tracked-sm">LUXURY GIFT PACKAGING</p>
+          <p class="text-[11px] text-stone-500 mt-1">For a memorable experience</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-[var(--gold)] shrink-0"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <div>
+          <p class="text-[12px] tracked-sm">SECURE CHECKOUT</p>
+          <p class="text-[11px] text-stone-500 mt-1">Shop with confidence</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</div>
+</body>
+</html>
