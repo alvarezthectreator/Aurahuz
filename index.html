@@ -55,6 +55,10 @@
   .cart-backdrop.is-open{ opacity:1; pointer-events:auto; }
   .checkout-panel{ display:none; }
   .checkout-panel.is-open{ display:block; }
+  .site-modal{ display:none; }
+  .site-modal.is-open{ display:flex; }
+  .search-panel{ transform:translateY(-110%); transition:transform .3s ease; }
+  .search-panel.is-open{ transform:translateY(0); }
   .tracked{ letter-spacing:.18em; }
   .tracked-sm{ letter-spacing:.12em; }
   .divider-flourish::after{
@@ -72,7 +76,7 @@
   .bottle-shadow{ filter: drop-shadow(0 30px 40px rgba(0,0,0,.55)); }
 </style>
 </head>
-<body class="bg-[var(--cream)] text-[var(--ink)]">
+<body id="top" class="bg-[var(--cream)] text-[var(--ink)]">
 
 <!-- ============ OUTER FRAME ============ -->
 <div class="min-h-screen p-0 md:p-0">
@@ -84,26 +88,26 @@
       <div class="font-serif-display tracked text-2xl md:text-[26px] text-[var(--gold-light)]">AURAHUZ</div>
 
       <nav class="hidden lg:flex items-center gap-10 text-[12px] tracked-sm text-stone-200">
-        <a href="#" class="pb-2 border-b border-[var(--gold)] text-white">HOME</a>
+        <a href="#top" class="pb-2 border-b border-[var(--gold)] text-white">HOME</a>
         <a href="#collection" class="hover:text-white transition-colors">COLLECTION</a>
-        <a href="#" class="hover:text-white transition-colors">OUR STORY</a>
-        <a href="#" class="hover:text-white transition-colors">INGREDIENTS</a>
-        <a href="#" class="hover:text-white transition-colors">JOURNAL</a>
-        <a href="#" class="hover:text-white transition-colors">CONTACT</a>
+        <a href="#story" class="info-link hover:text-white transition-colors" data-info="story">OUR STORY</a>
+        <a href="#signature" class="hover:text-white transition-colors">INGREDIENTS</a>
+        <a href="#journal" class="info-link hover:text-white transition-colors" data-info="journal">JOURNAL</a>
+        <a href="#contact" class="info-link hover:text-white transition-colors" data-info="contact">CONTACT</a>
       </nav>
 
       <div class="flex items-center gap-5">
-        <button aria-label="Search" class="text-stone-200 hover:text-white transition-colors">
+        <button id="searchButton" aria-label="Search" class="text-stone-200 hover:text-white transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         </button>
-        <button aria-label="Account" class="text-stone-200 hover:text-white transition-colors">
+        <button id="accountButton" aria-label="Account" class="text-stone-200 hover:text-white transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
         </button>
         <button id="bagButton" aria-label="Bag" class="relative text-stone-200 hover:text-white transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
           <span id="cartCount" class="absolute -right-3 -top-3 min-w-4 h-4 px-1 rounded-full bg-[var(--gold)] text-[9px] text-[#241c0c] flex items-center justify-center">0</span>
         </button>
-        <a href="#" class="gold-btn hidden sm:inline-block text-[11px] tracked-sm font-medium px-6 py-3">SHOP NOW</a>
+        <a href="#collection" class="gold-btn hidden sm:inline-block text-[11px] tracked-sm font-medium px-6 py-3">SHOP NOW</a>
       </div>
     </div>
   </header>
@@ -317,7 +321,7 @@
   </section>
 
   <!-- ============ SIGNATURE NOTES / OUR CRAFT ============ -->
-  <section class="bg-[#0c0a08] grid lg:grid-cols-2">
+  <section id="signature" class="bg-[#0c0a08] grid lg:grid-cols-2">
 
     <!-- Signature Notes -->
     <div class="px-8 md:px-12 py-16 border-b lg:border-b-0 lg:border-r border-white/10">
@@ -358,7 +362,7 @@
     </div>
 
     <!-- Our Craft -->
-    <div class="px-8 md:px-12 py-16 grid md:grid-cols-2 gap-10 items-start">
+    <div id="story" class="px-8 md:px-12 py-16 grid md:grid-cols-2 gap-10 items-start">
       <div>
         <p class="tracked-sm text-[11px] text-[var(--gold)]">OUR CRAFT</p>
         <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Confidence in Every Detail</h2>
@@ -405,7 +409,7 @@
   <section class="grid lg:grid-cols-2">
 
     <!-- Gift -->
-    <div class="bg-[var(--cream)] px-8 md:px-12 py-16 grid md:grid-cols-2 gap-8 items-center">
+    <div id="contact" class="bg-[var(--cream)] px-8 md:px-12 py-16 grid md:grid-cols-2 gap-8 items-center">
       <div>
         <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">A LOOK TO REMEMBER</p>
         <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">The Art of Dressing</h2>
@@ -423,7 +427,7 @@
     </div>
 
     <!-- Testimonial -->
-    <div class="px-8 md:px-12 py-16 flex flex-col justify-center relative" style="background:radial-gradient(120% 100% at 80% 20%, #1c1712, #0c0a08 70%);">
+    <div id="journal" class="px-8 md:px-12 py-16 flex flex-col justify-center relative" style="background:radial-gradient(120% 100% at 80% 20%, #1c1712, #0c0a08 70%);">
       <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY STYLE LOVERS</p>
       <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight max-w-md">
         Loved by Those Who Dress With Intention
@@ -504,13 +508,13 @@
             Contemporary fashion and statement details for the way you want to be remembered.
           </p>
           <div class="flex items-center gap-3 mt-7">
-            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+            <a href="https://instagram.com/_aurahus" target="_blank" rel="noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
               <span class="text-[12px] font-semibold">ig</span>
             </a>
-            <a href="#" aria-label="TikTok" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+            <a href="https://www.tiktok.com/@_aurahus" target="_blank" rel="noreferrer" aria-label="TikTok" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
               <span class="text-[12px] font-semibold">tk</span>
             </a>
-            <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+            <a href="https://facebook.com/Auha%20huz" target="_blank" rel="noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
               <span class="text-[12px] font-semibold">f</span>
             </a>
           </div>
@@ -529,10 +533,10 @@
         <div>
           <h2 class="tracked-sm text-[11px] text-[var(--gold)]">HELP</h2>
           <nav class="mt-5 space-y-3 text-[13px]">
-            <a href="#" class="block hover:text-white transition-colors">Contact Us</a>
-            <a href="#" class="block hover:text-white transition-colors">Shipping &amp; Delivery</a>
-            <a href="#" class="block hover:text-white transition-colors">Returns &amp; Exchanges</a>
-            <a href="#" class="block hover:text-white transition-colors">Size Guide</a>
+            <a href="https://api.whatsapp.com/send/?phone=2348144471731&amp;text=Hello!%20Let%20us%20know%20how%20we%20can%20help%20you.%20Thank%20you." target="_blank" rel="noreferrer" class="block hover:text-white transition-colors">Contact Us</a>
+            <a href="#shipping" class="info-link block hover:text-white transition-colors" data-info="shipping">Shipping &amp; Delivery</a>
+            <a href="#returns" class="info-link block hover:text-white transition-colors" data-info="returns">Returns &amp; Exchanges</a>
+            <a href="#size-guide" class="info-link block hover:text-white transition-colors" data-info="size">Size Guide</a>
           </nav>
         </div>
 
@@ -552,14 +556,44 @@
       <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 px-8 md:px-12 py-5 text-[10px] text-stone-500">
         <p>© 2026 Aurahuz. All rights reserved.</p>
         <div class="flex items-center gap-5">
-          <a href="#" class="hover:text-stone-200 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-stone-200 transition-colors">Terms &amp; Conditions</a>
+          <a href="#privacy" class="info-link hover:text-stone-200 transition-colors" data-info="privacy">Privacy Policy</a>
+          <a href="#terms" class="info-link hover:text-stone-200 transition-colors" data-info="terms">Terms &amp; Conditions</a>
         </div>
       </div>
     </div>
   </footer>
 
 </div>
+</div>
+
+<div id="searchPanel" class="search-panel fixed left-0 right-0 top-0 z-[70] bg-white text-[#303338] shadow-xl">
+  <div class="mx-auto flex max-w-[900px] items-center gap-4 px-6 py-5">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <label for="siteSearch" class="sr-only">Search products</label>
+    <input id="siteSearch" type="search" placeholder="Search the collection" class="min-w-0 flex-1 text-lg outline-none" autocomplete="off">
+    <button id="closeSearch" aria-label="Close search" class="text-2xl text-stone-400">×</button>
+  </div>
+  <div id="searchResults" class="mx-auto hidden max-w-[900px] border-t border-stone-100 px-6 py-4"></div>
+</div>
+
+<div id="accountPanel" class="site-modal fixed inset-0 z-[70] items-center justify-center bg-black/45 px-6">
+  <div class="w-full max-w-md rounded-2xl bg-white p-7 text-[#303338] shadow-2xl">
+    <div class="flex items-center justify-between"><h2 class="text-xl font-semibold">Welcome to Aurahuz</h2><button class="close-site-modal text-2xl text-stone-400" aria-label="Close account">×</button></div>
+    <p class="mt-2 text-sm text-stone-500">Sign in to view your orders and saved details.</p>
+    <form id="accountForm" class="mt-6 space-y-3">
+      <input required type="email" placeholder="Email address" class="w-full rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+      <input required type="password" placeholder="Password" class="w-full rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+      <button class="w-full rounded-xl bg-[#002522] py-3.5 text-[11px] text-white">SIGN IN</button>
+    </form>
+  </div>
+</div>
+
+<div id="infoPanel" class="site-modal fixed inset-0 z-[70] items-center justify-center bg-black/45 px-6">
+  <div class="w-full max-w-lg rounded-2xl bg-white p-7 text-[#303338] shadow-2xl">
+    <div class="flex items-center justify-between"><p id="infoEyebrow" class="tracked-sm text-[10px] text-[var(--gold-dim)]"></p><button class="close-site-modal text-2xl text-stone-400" aria-label="Close information">×</button></div>
+    <h2 id="infoTitle" class="mt-3 font-serif-display text-3xl"></h2>
+    <p id="infoBody" class="mt-4 text-sm leading-relaxed text-stone-600"></p>
+  </div>
 </div>
 
 <div id="cartBackdrop" class="cart-backdrop fixed inset-0 z-40 bg-black/40"></div>
@@ -719,6 +753,75 @@
   hero.addEventListener('mouseenter', () => clearInterval(heroTimer));
   hero.addEventListener('mouseleave', startHeroSlider);
   startHeroSlider();
+
+  const searchPanel = document.getElementById('searchPanel');
+  const searchInput = document.getElementById('siteSearch');
+  const searchResults = document.getElementById('searchResults');
+  const accountPanel = document.getElementById('accountPanel');
+  const infoPanel = document.getElementById('infoPanel');
+  const infoContent = {
+    story: ['OUR STORY', 'Aurahuz curates expressive fashion, elevated essentials, and statement details for people who dress with intention.'],
+    journal: ['THE JOURNAL', 'Explore styling ideas, seasonal edits, and inspiration for making every look distinctly yours.'],
+    contact: ['CONTACT US', 'Reach our customer care team through WhatsApp for product questions, delivery support, and order help.'],
+    shipping: ['SHIPPING & DELIVERY', 'Orders are prepared with care and delivered across Nigeria. Delivery timing and fees are confirmed during order processing.'],
+    returns: ['RETURNS & EXCHANGES', 'Please review sizes, colors, and product details before ordering. Contact customer care promptly if an item arrives damaged or incorrect.'],
+    size: ['SIZE GUIDE', 'Check each product description for fit details. For help choosing a size, contact customer care before placing your order.'],
+    privacy: ['PRIVACY POLICY', 'Your contact and delivery details are used only to process orders, provide support, and communicate important store updates.'],
+    terms: ['TERMS & CONDITIONS', 'By placing an order, you confirm that your delivery details and selected products are correct before checkout.']
+  };
+
+  document.getElementById('searchButton').addEventListener('click', () => {
+    searchPanel.classList.add('is-open');
+    searchInput.focus();
+  });
+  document.getElementById('closeSearch').addEventListener('click', () => {
+    searchPanel.classList.remove('is-open');
+    searchResults.classList.add('hidden');
+    searchInput.value = '';
+  });
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      searchResults.classList.add('hidden');
+      return;
+    }
+    const matches = productCards.filter(card => card.textContent.toLowerCase().includes(query));
+    searchResults.classList.remove('hidden');
+    searchResults.innerHTML = matches.length ? matches.map(card => {
+      const product = readProduct(card);
+      return `<button class="search-result flex w-full items-center gap-3 border-b border-stone-100 py-3 text-left" data-search-image="${product.image}"><img src="${product.image}" alt="${product.title}" class="h-12 w-12 rounded-lg object-cover"><span><strong class="block text-sm">${product.title}</strong><small class="text-stone-500">${product.price}</small></span></button>`;
+    }).join('') : '<p class="py-3 text-sm text-stone-500">No products found.</p>';
+  });
+
+  searchResults.addEventListener('click', event => {
+    const result = event.target.closest('[data-search-image]');
+    if (!result) return;
+    const card = productCards.find(productCard => productCard.querySelector('img').src === result.dataset.searchImage);
+    searchPanel.classList.remove('is-open');
+    if (card) openProduct(card);
+  });
+
+  document.getElementById('accountButton').addEventListener('click', () => accountPanel.classList.add('is-open'));
+  document.getElementById('accountForm').addEventListener('submit', event => {
+    event.preventDefault();
+    event.target.querySelector('button').textContent = 'SIGNED IN';
+  });
+  document.querySelectorAll('.info-link').forEach(link => link.addEventListener('click', event => {
+    const content = infoContent[link.dataset.info];
+    if (!content) return;
+    event.preventDefault();
+    document.getElementById('infoEyebrow').textContent = content[0];
+    document.getElementById('infoTitle').textContent = content[0];
+    document.getElementById('infoBody').textContent = content[1];
+    infoPanel.classList.add('is-open');
+  }));
+  document.querySelectorAll('.close-site-modal').forEach(button => button.addEventListener('click', () => {
+    accountPanel.classList.remove('is-open');
+    infoPanel.classList.remove('is-open');
+  }));
+  [accountPanel, infoPanel].forEach(panel => panel.addEventListener('click', event => {
+    if (event.target === panel) panel.classList.remove('is-open');
+  }));
 
   const detailOverlay = document.getElementById('productDetail');
   const productCards = [...document.querySelectorAll('.product-card')];
@@ -911,6 +1014,11 @@
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && detailOverlay.classList.contains('is-open')) document.getElementById('closeProduct').click();
     if (event.key === 'Escape' && cartDrawer.classList.contains('is-open')) closeCart();
+    if (event.key === 'Escape') {
+      searchPanel.classList.remove('is-open');
+      accountPanel.classList.remove('is-open');
+      infoPanel.classList.remove('is-open');
+    }
   });
   renderCart();
 </script>
