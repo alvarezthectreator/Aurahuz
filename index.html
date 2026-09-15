@@ -18,6 +18,43 @@
   }
   body{ margin:0; font-family:'Jost', sans-serif; }
   .font-serif-display{ font-family:'Cormorant Garamond', serif; }
+  .product-card{ border-radius:18px; }
+  .product-card > div:first-child{ height:auto !important; aspect-ratio:1 / 1; }
+  .product-card > div:last-child{ padding:.625rem .625rem; }
+  .product-card{ animation:card-enter .55s cubic-bezier(.22,1,.36,1) both; }
+  .product-card:nth-child(2){ animation-delay:.06s; }
+  .product-card:nth-child(3){ animation-delay:.12s; }
+  .product-card:nth-child(4){ animation-delay:.18s; }
+  .product-card:nth-child(5){ animation-delay:.24s; }
+  .product-card img{ height:100%; transition:transform .5s cubic-bezier(.22,1,.36,1); }
+  .product-card:hover img{ transform:scale(1.06); }
+  .product-card h3{ font-size:11px; line-height:1.4; }
+  .product-card .price{ font-size:13px; }
+  .product-card .old-price{ font-size:10px; }
+  .product-card button{ font-size:10px; padding-top:0.55rem; padding-bottom:0.55rem; transition:transform .2s ease, background-color .2s ease; }
+  .product-card button:hover{ transform:translateY(-1px); }
+  @keyframes card-enter{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .product-card{ animation:none; }
+    .product-card img,.product-card button{ transition:none; }
+  }
+  .product-card{ cursor:pointer; }
+  .product-card:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); transition:transform .2s ease, box-shadow .2s ease; }
+  body.product-detail-open{ overflow:hidden; }
+  .detail-overlay{ display:none; }
+  .detail-overlay.is-open{ display:block; }
+  .hero-slide{ opacity:0; transition:opacity .8s ease; }
+  .hero-slide.is-active{ opacity:1; }
+  .hero-dot.is-active{ background:var(--gold); color:#0c0a08; }
+  .cart-drawer{ transform:translateX(100%); transition:transform .35s cubic-bezier(.22,1,.36,1); }
+  .cart-drawer.is-open{ transform:translateX(0); }
+  .cart-backdrop{ opacity:0; pointer-events:none; transition:opacity .3s ease; }
+  .cart-backdrop.is-open{ opacity:1; pointer-events:auto; }
+  .checkout-panel{ display:none; }
+  .checkout-panel.is-open{ display:block; }
   .tracked{ letter-spacing:.18em; }
   .tracked-sm{ letter-spacing:.12em; }
   .divider-flourish::after{
@@ -62,8 +99,9 @@
         <button aria-label="Account" class="text-stone-200 hover:text-white transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
         </button>
-        <button aria-label="Bag" class="text-stone-200 hover:text-white transition-colors">
+        <button id="bagButton" aria-label="Bag" class="relative text-stone-200 hover:text-white transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span id="cartCount" class="absolute -right-3 -top-3 min-w-4 h-4 px-1 rounded-full bg-[var(--gold)] text-[9px] text-[#241c0c] flex items-center justify-center">0</span>
         </button>
         <a href="#" class="gold-btn hidden sm:inline-block text-[11px] tracked-sm font-medium px-6 py-3">SHOP NOW</a>
       </div>
@@ -72,7 +110,8 @@
 
   <!-- ============ HERO ============ -->
   <section class="relative overflow-hidden min-h-[620px] md:min-h-[700px] bg-[#0c0a08]">
-    <div class="absolute inset-0 z-0" style="background-image:url('Create_gold_necklace_hero_section_2K_20260913173539.jpeg'); background-size:cover; background-position:center center;"></div>
+    <div class="hero-slide is-active absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('Create_gold_necklace_hero_section_2K_20260913173539.jpeg');"></div>
+    <div class="hero-slide absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('IMG_7160.JPG_2K_20260915124110.jpeg');"></div>
     <div class="absolute inset-0 z-10" style="background:linear-gradient(90deg, rgba(12,10,8,0.72) 0%, rgba(12,10,8,0.45) 28%, rgba(12,10,8,0.2) 55%, rgba(12,10,8,0.5) 100%);"></div>
 
     <div class="relative z-20 max-w-[1440px] mx-auto grid lg:grid-cols-[1.2fr_0.8fr] items-center gap-6 px-8 md:px-12 py-16 md:py-20 min-h-[620px] md:min-h-[700px]">
@@ -80,20 +119,19 @@
       <div class="relative z-10 max-w-[560px]">
         <p class="tracked-sm text-[12px] text-[var(--gold)] mb-6">DISCOVER THE COLLECTION</p>
         <h1 class="font-serif-display text-[56px] md:text-[68px] leading-[0.98] text-[#f3ede0]">
-          Essence in<br>
+          Style in<br>
           <span class="italic text-[var(--gold-light)] font-normal">its purest form.</span>
         </h1>
         <p class="mt-7 max-w-sm text-[15px] leading-relaxed text-stone-300/90">
-          Each fragrance is a story—crafted with rare ingredients, balanced with intention, and designed to leave a lasting impression.
+          Discover expressive pieces, elevated essentials, and statement details curated to make every entrance your own.
         </p>
         <a href="#collection" class="gold-btn inline-block mt-9 text-[12px] tracked-sm font-medium px-8 py-4">
           EXPLORE THE COLLECTION
         </a>
 
-        <div class="flex items-center gap-6 mt-14 text-[13px] tracked-sm">
-          <span class="text-white border-b border-[var(--gold)] pb-1">01</span>
-          <span class="text-[var(--gold)] border-b border-[var(--gold)] pb-1">02</span>
-          <span class="text-stone-500">03</span>
+        <div class="flex items-center gap-3 mt-14 text-[11px] tracked-sm">
+          <button class="hero-dot is-active w-8 h-8 rounded-full border border-[var(--gold)] text-white" data-slide="0" aria-label="Show first hero slide">01</button>
+          <button class="hero-dot w-8 h-8 rounded-full border border-white/30 text-stone-300" data-slide="1" aria-label="Show second hero slide">02</button>
         </div>
       </div>
 
@@ -108,168 +146,168 @@
   </section>
 
   <!-- ============ THE COLLECTION ============ -->
-  <section id="collection" class="bg-[var(--cream)] py-20 px-8 md:px-12">
+  <section id="collection" class="bg-[var(--cream)] py-12 px-6 md:px-10">
     <div class="max-w-[1440px] mx-auto">
       <h2 class="font-serif-display text-center text-[34px] tracked-sm text-[#221c12] divider-flourish">THE COLLECTION</h2>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Woman lace lingerie" class="h-full w-full object-cover" />
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-8">
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-44 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Woman lace lingerie" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Woman lace lingerie</h3>
+          <div class="px-2.5 py-2.5">
+            <h3 class="font-medium text-[#221c12]">Woman lace lingerie</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 30,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_2_w44lwux42l.jpg" alt="3D alien men's slides" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_2_w44lwux42l.jpg" alt="3D alien men's slides" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">3D alien men's slides</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">3D alien men's slides</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 82,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 90,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 82,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 90,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_6_mkyxtj9t4k.jpg" alt="Automatic rebound ab roller" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_6_mkyxtj9t4k.jpg" alt="Automatic rebound ab roller" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Automatic Rebound Ab Roller</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Automatic Rebound Ab Roller</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 48,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 55,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 48,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 55,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_8_7lkf2u199w.jpg" alt="Sunglasses" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_8_7lkf2u199w.jpg" alt="Sunglasses" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Sunglasses</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Sunglasses</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 30,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_4_8t12erdbvw.jpg" alt="Luxury rhinestone body chain" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_4_8t12erdbvw.jpg" alt="Luxury rhinestone body chain" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Luxury Rhinestone Body Chain</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Luxury Rhinestone Body Chain</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 20,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 25,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 20,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 25,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-6">
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_3_shbfbfgkft.jpg" alt="Luxe spiral tassel necklace" class="h-full w-full object-cover" />
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-8">
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_3_shbfbfgkft.jpg" alt="Luxe spiral tassel necklace" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Luxe Spiral Tassel Necklace</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Luxe Spiral Tassel Necklace</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 35,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 35,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_1_5vukrz8ghq.jpg" alt="Celeste crystal cut-out dress" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_1_5vukrz8ghq.jpg" alt="Celeste crystal cut-out dress" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Celeste Crystal Cut-Out Dress</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Celeste Crystal Cut-Out Dress</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 35,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 40,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 35,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 40,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_7_hthejwzb8i.jpg" alt="Polarized sunglasses" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_7_hthejwzb8i.jpg" alt="Polarized sunglasses" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Polarized Sunglasses</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Polarized Sunglasses</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 25,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 30,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 25,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 30,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_9_tfv3xw6xjf.jpg" alt="Sunglasses" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_9_tfv3xw6xjf.jpg" alt="Sunglasses" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Sunglasses</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Sunglasses</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 10,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 15,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 10,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 15,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
         </article>
 
-        <article class="bg-white group rounded-[26px] overflow-hidden shadow-sm">
-          <div class="h-72 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Luxury baroque pearl jewelry" class="h-full w-full object-cover" />
+        <article class="product-card bg-white group overflow-hidden shadow-sm">
+          <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
+            <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Luxury baroque pearl jewelry" class="w-full object-cover" />
           </div>
-          <div class="px-4 py-4">
-            <h3 class="text-[14px] font-medium text-[#221c12]">Luxury Baroque Pearl Jewelry</h3>
+          <div class="px-3 py-3">
+            <h3 class="font-medium text-[#221c12]">Luxury Baroque Pearl Jewelry</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
-              <p class="text-[16px] font-semibold text-[#221c12]">NGN 20,000.00</p>
-              <p class="text-[12px] text-stone-400 line-through mt-1">NGN 25,000.00</p>
+              <p class="price font-semibold text-[#221c12]">NGN 20,000.00</p>
+              <p class="old-price text-stone-400 line-through mt-1">NGN 25,000.00</p>
             </div>
-            <button class="mt-3 w-full bg-[#221c12] text-white text-[11px] tracked-sm py-2.5 rounded-full hover:bg-[#0c0a08] transition-colors">
+            <button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">
               Add To Cart
             </button>
           </div>
@@ -283,39 +321,39 @@
 
     <!-- Signature Notes -->
     <div class="px-8 md:px-12 py-16 border-b lg:border-b-0 lg:border-r border-white/10">
-      <p class="tracked-sm text-[11px] text-[var(--gold)]">THE ART OF COMPOSITION</p>
-      <h2 class="font-serif-display text-[34px] text-[#f3ede0] mt-3">Signature Notes</h2>
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">THE ART OF STYLE</p>
+      <h2 class="font-serif-display text-[34px] text-[#f3ede0] mt-3">Signature Details</h2>
 
       <div class="grid grid-cols-5 gap-3 mt-9">
         <div class="text-center">
-          <img src="https://placehold.co/160x160/5c6b1e/f0f0e0?text=Bergamot" alt="Bergamot placeholder" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">BERGAMOT</p>
-          <p class="text-[10px] text-stone-500 mt-1">Bright &amp; Uplifting</p>
+          <img src="img/imgi_7_hthejwzb8i.jpg" alt="Statement sunglasses" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">STATEMENT EYEWEAR</p>
+          <p class="text-[10px] text-stone-500 mt-1">Bold &amp; Confident</p>
         </div>
         <div class="text-center">
-          <img src="https://placehold.co/160x160/8a3a4d/f5e6e9?text=Rose" alt="Rose Absolute placeholder" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">ROSE ABSOLUTE</p>
-          <p class="text-[10px] text-stone-500 mt-1">Floral &amp; Romantic</p>
+          <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Lace lingerie" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">LACE LAYERS</p>
+          <p class="text-[10px] text-stone-500 mt-1">Delicate &amp; Romantic</p>
         </div>
         <div class="text-center">
-          <img src="https://placehold.co/160x160/241a10/c9a24a?text=Oud" alt="Oud Wood placeholder" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">OUD WOOD</p>
-          <p class="text-[10px] text-stone-500 mt-1">Rich &amp; Mysterious</p>
+          <img src="img/imgi_3_shbfbfgkft.jpg" alt="Gold tassel necklace" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">GOLD ACCENTS</p>
+          <p class="text-[10px] text-stone-500 mt-1">Rich &amp; Refined</p>
         </div>
         <div class="text-center">
-          <img src="https://placehold.co/160x160/8a5518/f5e2c0?text=Amber" alt="Amber placeholder" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">AMBER</p>
-          <p class="text-[10px] text-stone-500 mt-1">Warm &amp; Resinous</p>
+          <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Pearl jewelry" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">PEARL FINISHES</p>
+          <p class="text-[10px] text-stone-500 mt-1">Soft &amp; Timeless</p>
         </div>
         <div class="text-center">
-          <img src="https://placehold.co/160x160/7a5030/e9d5b8?text=Sandalwood" alt="Sandalwood placeholder" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">SANDALWOOD</p>
-          <p class="text-[10px] text-stone-500 mt-1">Smooth &amp; Creamy</p>
+          <img src="img/imgi_1_5vukrz8ghq.jpg" alt="Crystal cut-out dress" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">EVENING GLAMOUR</p>
+          <p class="text-[10px] text-stone-500 mt-1">Daring &amp; Polished</p>
         </div>
       </div>
 
       <button class="mt-10 border border-[var(--gold-dim)] text-[11px] tracked-sm text-stone-200 px-6 py-3 hover:bg-white/5 transition-colors">
-        VIEW ALL INGREDIENTS
+        VIEW ALL DETAILS
       </button>
     </div>
 
@@ -323,7 +361,7 @@
     <div class="px-8 md:px-12 py-16 grid md:grid-cols-2 gap-10 items-start">
       <div>
         <p class="tracked-sm text-[11px] text-[var(--gold)]">OUR CRAFT</p>
-        <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Luxury in Every Detail</h2>
+        <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Confidence in Every Detail</h2>
 
         <div class="mt-9 space-y-7">
           <div class="flex gap-4">
@@ -331,8 +369,8 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">EXPERTLY BLENDED</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Our master perfumers blend rare ingredients to create timeless scents.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">THOUGHTFULLY DESIGNED</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Every silhouette is chosen to make your personal style feel effortless.</p>
             </div>
           </div>
           <div class="flex gap-4">
@@ -340,8 +378,8 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">FINEST INGREDIENTS</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Sourced ethically from around the world for exceptional quality.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">QUALITY MATERIALS</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Selected fabrics, polished finishes, and details made to be noticed.</p>
             </div>
           </div>
           <div class="flex gap-4">
@@ -349,16 +387,16 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c2 3 3.5 5.5 3.5 8a3.5 3.5 0 1 1-7 0C8.5 8.5 10 6 12 3Z"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">HANDCRAFTED IN SMALL BATCHES</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Meticulously crafted to ensure perfection in every bottle.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">MADE TO BE REMEMBERED</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Statement pieces created for nights out, celebrations, and every entrance.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="h-full min-h-[280px] rounded-sm overflow-hidden">
-        <img src="https://placehold.co/600x500/1c1712/c9a24a?text=Perfumer+at+Work"
-             alt="Master perfumer crafting fragrance placeholder" class="w-full h-full object-cover" />
+           <img src="img/imgi_4_8t12erdbvw.jpg"
+             alt="Luxury rhinestone body chain" class="w-full h-full object-cover" />
       </div>
     </div>
   </section>
@@ -369,26 +407,26 @@
     <!-- Gift -->
     <div class="bg-[var(--cream)] px-8 md:px-12 py-16 grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">A GIFT TO REMEMBER</p>
-        <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">The Art of Gifting</h2>
+        <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">A LOOK TO REMEMBER</p>
+        <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">The Art of Dressing</h2>
         <p class="text-[13px] text-stone-600 mt-4 leading-relaxed max-w-xs">
-          Presented in our signature packaging, AURA NOIR is more than a fragrance—it's an unforgettable experience.
+          From statement accessories to standout silhouettes, Aurahuz makes getting dressed an unforgettable experience.
         </p>
         <button class="mt-8 border border-[#221c12]/40 text-[11px] tracked-sm px-6 py-3 hover:bg-black/5 transition-colors">
-          SHOP GIFT SETS
+          SHOP THE EDIT
         </button>
       </div>
       <div class="h-64 rounded-sm overflow-hidden">
-        <img src="https://placehold.co/500x400/cfc1a0/141210?font=playfair-display&text=Gift+Set"
-             alt="Aura Noir gift box placeholder" class="w-full h-full object-cover" />
+           <img src="img/imgi_10_7lpiy4p5ra.jpg"
+             alt="Luxury baroque pearl jewelry" class="w-full h-full object-cover" />
       </div>
     </div>
 
     <!-- Testimonial -->
     <div class="px-8 md:px-12 py-16 flex flex-col justify-center relative" style="background:radial-gradient(120% 100% at 80% 20%, #1c1712, #0c0a08 70%);">
-      <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY CONNOISSEURS</p>
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY STYLE LOVERS</p>
       <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight max-w-md">
-        Loved by Those Who Appreciate the Exceptional
+        Loved by Those Who Dress With Intention
       </h2>
 
       <div class="flex gap-1 mt-6 text-[var(--gold)]">
@@ -396,9 +434,9 @@
       </div>
 
       <p class="font-serif-display italic text-[19px] text-stone-200 mt-5 max-w-md leading-relaxed">
-        "AURA NOIR is in a league of its own. Every fragrance feels personal, luxurious, and unforgettable."
+        "Every piece feels personal, luxurious, and easy to make your own. Aurahuz has become my favorite place to find a statement look."
       </p>
-      <p class="tracked-sm text-[11px] text-stone-500 mt-4">— SOPHIA L., NEW YORK</p>
+      <p class="tracked-sm text-[11px] text-stone-500 mt-4">— SOPHIA L., LAGOS</p>
 
       <div class="flex gap-3 mt-10">
         <button aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
@@ -411,8 +449,9 @@
     </div>
   </section>
 
-  <!-- ============ FOOTER FEATURE BAR ============ -->
-  <section class="bg-[#0c0a08] border-t border-white/10">
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-[#0c0a08] border-t border-white/10 text-stone-300">
+    <!-- Service benefits -->
     <div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 px-8 md:px-12 py-8 text-stone-300">
 
       <div class="flex items-center gap-3">
@@ -456,9 +495,424 @@
       </div>
 
     </div>
-  </section>
+
+    <div class="border-t border-white/10">
+      <div class="max-w-[1440px] mx-auto grid lg:grid-cols-[1.2fr_1fr_1fr_1.4fr] gap-12 px-8 md:px-12 py-14">
+        <div>
+          <div class="font-serif-display tracked text-3xl text-[var(--gold-light)]">AURAHUZ</div>
+          <p class="text-[13px] leading-relaxed text-stone-400 mt-5 max-w-xs">
+            Contemporary fashion and statement details for the way you want to be remembered.
+          </p>
+          <div class="flex items-center gap-3 mt-7">
+            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+              <span class="text-[12px] font-semibold">ig</span>
+            </a>
+            <a href="#" aria-label="TikTok" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+              <span class="text-[12px] font-semibold">tk</span>
+            </a>
+            <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
+              <span class="text-[12px] font-semibold">f</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="tracked-sm text-[11px] text-[var(--gold)]">SHOP</h2>
+          <nav class="mt-5 space-y-3 text-[13px]">
+            <a href="#collection" class="block hover:text-white transition-colors">New Arrivals</a>
+            <a href="#collection" class="block hover:text-white transition-colors">Best Sellers</a>
+            <a href="#collection" class="block hover:text-white transition-colors">Lingerie</a>
+            <a href="#collection" class="block hover:text-white transition-colors">Accessories</a>
+          </nav>
+        </div>
+
+        <div>
+          <h2 class="tracked-sm text-[11px] text-[var(--gold)]">HELP</h2>
+          <nav class="mt-5 space-y-3 text-[13px]">
+            <a href="#" class="block hover:text-white transition-colors">Contact Us</a>
+            <a href="#" class="block hover:text-white transition-colors">Shipping &amp; Delivery</a>
+            <a href="#" class="block hover:text-white transition-colors">Returns &amp; Exchanges</a>
+            <a href="#" class="block hover:text-white transition-colors">Size Guide</a>
+          </nav>
+        </div>
+
+        <div>
+          <h2 class="tracked-sm text-[11px] text-[var(--gold)]">JOIN THE EDIT</h2>
+          <p class="text-[13px] text-stone-400 leading-relaxed mt-5 max-w-sm">Sign up for new drops, styling inspiration, and private offers.</p>
+          <form class="flex mt-5 border-b border-white/25 focus-within:border-[var(--gold)] transition-colors" onsubmit="event.preventDefault()">
+            <label for="footerEmail" class="sr-only">Email address</label>
+            <input id="footerEmail" type="email" placeholder="Your email address" class="min-w-0 flex-1 bg-transparent py-3 text-[12px] text-white placeholder:text-stone-500 outline-none" required />
+            <button type="submit" aria-label="Subscribe to newsletter" class="text-[var(--gold)] text-[11px] tracked-sm px-2 hover:text-white transition-colors">JOIN</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 px-8 md:px-12 py-5 text-[10px] text-stone-500">
+        <p>© 2026 Aurahuz. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+          <a href="#" class="hover:text-stone-200 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-stone-200 transition-colors">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </div>
 </div>
+
+<div id="cartBackdrop" class="cart-backdrop fixed inset-0 z-40 bg-black/40"></div>
+<aside id="cartDrawer" class="cart-drawer fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white text-[#303338] shadow-2xl" aria-label="Shopping cart">
+  <div class="flex items-center justify-between border-b border-stone-100 px-6 py-5">
+    <div>
+      <p class="tracked-sm text-[10px] text-stone-400">YOUR SHOPPING BAG</p>
+      <h2 class="mt-1 text-lg font-semibold">Cart <span id="cartHeadingCount" class="text-stone-400">(0)</span></h2>
+    </div>
+    <button id="closeCart" aria-label="Close shopping cart" class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-50 text-stone-500 hover:bg-stone-100">×</button>
+  </div>
+
+  <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-5"></div>
+
+  <div class="border-t border-stone-100 px-6 py-5">
+    <div class="flex items-center justify-between text-sm font-semibold">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">NGN 0.00</span>
+    </div>
+    <p class="mt-2 text-[11px] text-stone-500">Delivery fees are calculated at checkout.</p>
+    <button id="checkoutButton" class="mt-5 w-full rounded-xl bg-[#002522] py-3.5 text-[11px] text-white transition-colors hover:bg-[#003c36] disabled:cursor-not-allowed disabled:bg-stone-300" disabled>Proceed To Checkout</button>
+  </div>
+</aside>
+
+<div id="checkoutPanel" class="checkout-panel fixed inset-0 z-[60] overflow-y-auto bg-white text-[#303338]">
+  <div class="min-h-screen">
+    <div class="flex h-16 items-center justify-between border-b border-stone-100 px-6 md:px-12">
+      <button id="backToCart" class="text-[11px] text-stone-500 hover:text-[#002522]">← Back to cart</button>
+      <div class="font-serif-display text-xl tracking-[.18em] text-[#002522]">AURAHUZ</div>
+      <button id="closeCheckout" aria-label="Close checkout" class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-50 text-stone-500">×</button>
+    </div>
+    <main class="mx-auto grid max-w-[1100px] gap-10 px-6 py-10 lg:grid-cols-[1.1fr_.9fr] md:px-10">
+      <form id="checkoutForm" class="space-y-7">
+        <div>
+          <p class="tracked-sm text-[10px] text-stone-400">CHECKOUT</p>
+          <h1 class="mt-2 text-2xl font-semibold">Complete your order</h1>
+        </div>
+        <section>
+          <h2 class="mb-4 text-sm font-semibold">Contact information</h2>
+          <input required type="email" placeholder="Email address" class="w-full rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+        </section>
+        <section>
+          <h2 class="mb-4 text-sm font-semibold">Delivery details</h2>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <input required placeholder="First name" class="rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+            <input required placeholder="Last name" class="rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+            <input required placeholder="Phone number" class="rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+            <input required placeholder="City" class="rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+            <input required placeholder="Delivery address" class="sm:col-span-2 rounded-lg border border-stone-200 px-4 py-3 text-sm outline-none focus:border-[#002522]">
+          </div>
+        </section>
+        <section>
+          <h2 class="mb-4 text-sm font-semibold">Payment method</h2>
+          <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-[#002522] bg-stone-50 px-4 py-4 text-sm"><input type="radio" name="payment" checked> Pay on delivery</label>
+          <label class="mt-2 flex cursor-pointer items-center gap-3 rounded-lg border border-stone-200 px-4 py-4 text-sm"><input type="radio" name="payment"> Bank transfer</label>
+        </section>
+        <button class="w-full rounded-xl bg-[#002522] py-4 text-[11px] text-white hover:bg-[#003c36]">Place Order</button>
+      </form>
+
+      <aside class="h-fit rounded-2xl bg-stone-50 p-6">
+        <h2 class="text-sm font-semibold">Order summary</h2>
+        <div id="checkoutItems" class="mt-5 space-y-4"></div>
+        <div class="mt-6 space-y-3 border-t border-stone-200 pt-5 text-sm">
+          <div class="flex justify-between"><span>Subtotal</span><span id="checkoutSubtotal">NGN 0.00</span></div>
+          <div class="flex justify-between text-stone-500"><span>Delivery</span><span>Calculated after order</span></div>
+          <div class="flex justify-between border-t border-stone-200 pt-3 text-base font-semibold"><span>Total</span><span id="checkoutTotal">NGN 0.00</span></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+</div>
+
+<div id="productDetail" class="detail-overlay fixed inset-0 z-50 overflow-y-auto bg-white text-[#303338]">
+  <div class="min-h-screen">
+    <div class="h-16 border-b border-stone-100 flex items-center justify-between px-6 md:px-12">
+      <button id="shareProduct" aria-label="Share product" class="w-9 h-9 rounded-full border border-stone-100 text-stone-500 flex items-center justify-center hover:bg-stone-50">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V3M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      </button>
+      <button id="closeProduct" aria-label="Close product details" class="w-9 h-9 rounded-full border border-stone-100 text-stone-500 flex items-center justify-center hover:bg-stone-50">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <main class="max-w-[1180px] mx-auto px-6 md:px-0 py-8 md:py-12">
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-9">
+        <div class="h-[420px] md:h-[520px] lg:h-[600px] rounded-2xl overflow-hidden bg-stone-100">
+          <img id="detailImage" src="" alt="" class="w-full h-full object-cover" />
+        </div>
+
+        <div class="flex flex-col min-h-[520px] lg:min-h-[600px]">
+          <div>
+            <h1 id="detailTitle" class="text-[24px] md:text-[28px] font-semibold text-[#303338]"></h1>
+            <div class="flex items-center gap-2 mt-2">
+              <p id="detailPrice" class="text-[15px] font-semibold"></p>
+              <span class="rounded-full bg-[#edf8f3] text-[#263d35] text-[10px] font-semibold px-2 py-1">17% OFF</span>
+            </div>
+            <p id="detailOldPrice" class="text-[11px] text-stone-400 line-through mt-2"></p>
+            <div class="border-t border-stone-100 mt-4 pt-3">
+              <p id="detailDescription" class="text-[12px] leading-relaxed text-stone-600">A stylish, carefully selected piece designed for comfort, confidence, and everyday luxury.</p>
+              <div class="flex gap-2 mt-3">
+                <span class="rounded-full bg-stone-50 px-2 py-1 text-[9px] font-semibold">9 IN STOCK</span>
+                <span class="rounded-full bg-stone-50 px-2 py-1 text-[9px] font-semibold">FEATURED COLLECTION</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-auto border-t border-stone-100 pt-5">
+            <div class="flex items-center justify-between bg-stone-50 rounded-xl px-3 py-2 text-[11px] text-stone-500">
+              <span id="detailPriceBottom"></span>
+              <div class="flex items-center gap-4">
+                <button id="quantityDown" aria-label="Decrease quantity" class="w-6 h-6 rounded-full bg-white text-stone-500">−</button>
+                <span id="quantityValue">1</span>
+                <button id="quantityUp" aria-label="Increase quantity" class="w-6 h-6 rounded-full bg-white text-stone-500">+</button>
+              </div>
+            </div>
+            <button id="detailCart" class="mt-2 w-full rounded-xl bg-[#002522] text-white text-[11px] py-3.5 hover:bg-[#003c36] transition-colors">Add To Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="mt-14">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-[13px] font-semibold">You may also like</h2>
+          <div class="flex gap-2">
+            <button id="relatedPrev" aria-label="Previous products" class="w-8 h-8 rounded-full bg-stone-50">←</button>
+            <button id="relatedNext" aria-label="Next products" class="w-8 h-8 rounded-full bg-stone-50">→</button>
+          </div>
+        </div>
+        <div id="relatedProducts" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+  const hero = document.querySelector('section.relative.overflow-hidden');
+  const heroSlides = [...document.querySelectorAll('.hero-slide')];
+  const heroDots = [...document.querySelectorAll('.hero-dot')];
+  let activeHeroSlide = 0;
+  let heroTimer;
+
+  function showHeroSlide(index) {
+    activeHeroSlide = index;
+    heroSlides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === activeHeroSlide));
+    heroDots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === activeHeroSlide));
+  }
+
+  function startHeroSlider() {
+    clearInterval(heroTimer);
+    heroTimer = setInterval(() => showHeroSlide((activeHeroSlide + 1) % heroSlides.length), 3000);
+  }
+
+  heroDots.forEach(dot => dot.addEventListener('click', () => {
+    showHeroSlide(Number(dot.dataset.slide));
+    startHeroSlider();
+  }));
+  hero.addEventListener('mouseenter', () => clearInterval(heroTimer));
+  hero.addEventListener('mouseleave', startHeroSlider);
+  startHeroSlider();
+
+  const detailOverlay = document.getElementById('productDetail');
+  const productCards = [...document.querySelectorAll('.product-card')];
+  const detailImage = document.getElementById('detailImage');
+  const detailTitle = document.getElementById('detailTitle');
+  const detailPrice = document.getElementById('detailPrice');
+  const detailOldPrice = document.getElementById('detailOldPrice');
+  const detailPriceBottom = document.getElementById('detailPriceBottom');
+  const quantityValue = document.getElementById('quantityValue');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartBackdrop = document.getElementById('cartBackdrop');
+  const checkoutPanel = document.getElementById('checkoutPanel');
+  let cart = JSON.parse(localStorage.getItem('aurahuz-cart') || '[]').map(item => ({
+    ...item,
+    numericPrice: Number(item.price.replace(/[^0-9.]/g, ''))
+  }));
+  let activeProduct;
+  let quantity = 1;
+
+  function money(value) {
+    return `NGN ${Number(value).toLocaleString('en-NG', { minimumFractionDigits: 2 })}`;
+  }
+
+  function productFromCard(card) {
+    const product = readProduct(card);
+    return {
+      ...product,
+      id: product.image,
+      numericPrice: Number(product.price.replace(/[^0-9.]/g, ''))
+    };
+  }
+
+  function saveCart() {
+    localStorage.setItem('aurahuz-cart', JSON.stringify(cart));
+  }
+
+  function cartCount() {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  function cartTotal() {
+    return cart.reduce((total, item) => total + item.numericPrice * item.quantity, 0);
+  }
+
+  function renderCart() {
+    const count = cartCount();
+    const subtotal = money(cartTotal());
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartHeadingCount').textContent = `(${count})`;
+    document.getElementById('cartSubtotal').textContent = subtotal;
+    document.getElementById('checkoutSubtotal').textContent = subtotal;
+    document.getElementById('checkoutTotal').textContent = subtotal;
+    document.getElementById('checkoutButton').disabled = cart.length === 0;
+
+    document.getElementById('cartItems').innerHTML = cart.length ? cart.map(item => `
+      <article class="flex gap-3 border-b border-stone-100 pb-4">
+        <img src="${item.image}" alt="${item.title}" class="h-20 w-20 rounded-lg object-cover">
+        <div class="min-w-0 flex-1">
+          <div class="flex justify-between gap-3"><h3 class="truncate text-[12px] font-semibold">${item.title}</h3><button data-remove="${item.id}" class="text-stone-400 hover:text-red-700" aria-label="Remove ${item.title}">×</button></div>
+          <p class="mt-1 text-[11px] font-semibold">${money(item.numericPrice)}</p>
+          <div class="mt-3 flex items-center gap-3 text-xs">
+            <button data-decrease="${item.id}" class="h-6 w-6 rounded-full bg-stone-100">−</button><span>${item.quantity}</span><button data-increase="${item.id}" class="h-6 w-6 rounded-full bg-stone-100">+</button>
+          </div>
+        </div>
+      </article>`).join('') : '<div class="flex h-full flex-col items-center justify-center text-center"><p class="text-sm font-semibold">Your cart is empty</p><p class="mt-2 text-xs text-stone-500">Add something beautiful from the collection.</p></div>';
+
+    document.getElementById('checkoutItems').innerHTML = cart.map(item => `
+      <div class="flex items-center gap-3"><img src="${item.image}" alt="${item.title}" class="h-14 w-14 rounded-lg object-cover"><div class="min-w-0 flex-1"><p class="truncate text-xs font-semibold">${item.title}</p><p class="mt-1 text-[11px] text-stone-500">Qty ${item.quantity}</p></div><span class="text-xs font-semibold">${money(item.numericPrice * item.quantity)}</span></div>`).join('');
+  }
+
+  function openCart() {
+    renderCart();
+    cartDrawer.classList.add('is-open');
+    cartBackdrop.classList.add('is-open');
+  }
+
+  function closeCart() {
+    cartDrawer.classList.remove('is-open');
+    cartBackdrop.classList.remove('is-open');
+  }
+
+  function addToCart(product, amount = 1) {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) existing.quantity += amount;
+    else cart.push({ ...product, quantity: amount });
+    saveCart();
+    detailOverlay.classList.remove('is-open');
+    document.body.classList.remove('product-detail-open');
+    openCart();
+  }
+
+  function readProduct(card) {
+    return {
+      image: card.querySelector('img').src,
+      title: card.querySelector('h3').textContent.trim(),
+      price: card.querySelector('.price').textContent.trim(),
+      oldPrice: card.querySelector('.old-price').textContent.trim()
+    };
+  }
+
+  function openProduct(card) {
+    const product = productFromCard(card);
+    activeProduct = product;
+    detailImage.src = product.image;
+    detailImage.alt = product.title;
+    detailTitle.textContent = product.title;
+    detailPrice.textContent = product.price;
+    detailOldPrice.textContent = product.oldPrice;
+    detailPriceBottom.textContent = product.price;
+    quantity = 1;
+    quantityValue.textContent = quantity;
+    document.getElementById('relatedProducts').innerHTML = productCards
+      .filter(otherCard => otherCard !== card)
+      .slice(0, 5)
+      .map(otherCard => {
+        const other = readProduct(otherCard);
+        return `<button class="text-left rounded-xl overflow-hidden bg-white" data-related-image="${other.image}">
+          <img src="${other.image}" alt="${other.title}" class="w-full h-40 object-cover rounded-xl">
+          <span class="block text-[11px] mt-2 truncate">${other.title}</span>
+          <span class="block text-[10px] font-semibold mt-1">${other.price}</span>
+        </button>`;
+      }).join('');
+    detailOverlay.classList.add('is-open');
+    document.body.classList.add('product-detail-open');
+  }
+
+  productCards.forEach(card => {
+    card.addEventListener('click', () => openProduct(card));
+    card.querySelector('button').addEventListener('click', event => {
+      event.stopPropagation();
+      addToCart(productFromCard(card));
+    });
+  });
+  document.getElementById('bagButton').addEventListener('click', openCart);
+  document.getElementById('closeCart').addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+  document.getElementById('cartItems').addEventListener('click', event => {
+    const id = event.target.dataset.remove || event.target.dataset.increase || event.target.dataset.decrease;
+    if (!id) return;
+    const item = cart.find(entry => entry.id === id);
+    if (!item) return;
+    if (event.target.dataset.remove || event.target.dataset.decrease && item.quantity === 1) cart = cart.filter(entry => entry.id !== id);
+    else if (event.target.dataset.increase) item.quantity += 1;
+    else item.quantity -= 1;
+    saveCart();
+    renderCart();
+  });
+  document.getElementById('checkoutButton').addEventListener('click', () => {
+    closeCart();
+    renderCart();
+    checkoutPanel.classList.add('is-open');
+  });
+  document.getElementById('backToCart').addEventListener('click', () => {
+    checkoutPanel.classList.remove('is-open');
+    openCart();
+  });
+  document.getElementById('closeCheckout').addEventListener('click', () => checkoutPanel.classList.remove('is-open'));
+  document.getElementById('checkoutForm').addEventListener('submit', event => {
+    event.preventDefault();
+    alert('Thank you. Your Aurahuz order has been received.');
+    cart = [];
+    saveCart();
+    renderCart();
+    checkoutPanel.classList.remove('is-open');
+  });
+  document.getElementById('closeProduct').addEventListener('click', () => {
+    detailOverlay.classList.remove('is-open');
+    document.body.classList.remove('product-detail-open');
+  });
+  document.getElementById('quantityDown').addEventListener('click', () => {
+    quantity = Math.max(1, quantity - 1);
+    quantityValue.textContent = quantity;
+  });
+  document.getElementById('quantityUp').addEventListener('click', () => {
+    quantity += 1;
+    quantityValue.textContent = quantity;
+  });
+  document.getElementById('detailCart').addEventListener('click', () => {
+    if (activeProduct) addToCart(activeProduct, quantity);
+  });
+  document.getElementById('relatedProducts').addEventListener('click', event => {
+    const relatedButton = event.target.closest('[data-related-image]');
+    if (!relatedButton) return;
+    const relatedCard = productCards.find(card => card.querySelector('img').src === relatedButton.dataset.relatedImage);
+    if (relatedCard) openProduct(relatedCard);
+  });
+  detailOverlay.addEventListener('click', event => {
+    if (event.target === detailOverlay) document.getElementById('closeProduct').click();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && detailOverlay.classList.contains('is-open')) document.getElementById('closeProduct').click();
+    if (event.key === 'Escape' && cartDrawer.classList.contains('is-open')) closeCart();
+  });
+  renderCart();
+</script>
 </body>
 </html>
