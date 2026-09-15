@@ -1035,6 +1035,7 @@
       if (!response.ok) throw new Error('Unable to load fitness products.');
       const result = await response.json();
       const products = (result.data || []).slice(0, 1);
+      if (!products.length) throw new Error('No fitness products found.');
       const productMarkup = products.map(product => `<article class="product-card bg-white group overflow-hidden shadow-sm" data-product-id="${product.id}">
         <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden"><img src="${product.image}" alt="${product.name}" class="w-full object-cover"></div>
         <div class="px-3 py-3"><h3 class="font-medium text-[#221c12]">${product.name}</h3><div class="mt-2 pt-2 border-t border-stone-200"><p class="price font-semibold text-[#221c12]">NGN ${Number(product.price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>${product.old_price ? `<p class="old-price text-stone-400 line-through mt-1">NGN ${Number(product.old_price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>` : ''}</div><button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">Add To Cart</button></div>
@@ -1046,8 +1047,12 @@
       bindProductCards();
       document.body.classList.add('workout-products-loaded');
     } catch (error) {
+      const grids = [...document.querySelectorAll('#collection .grid')];
+      const fallbackGrid = grids[0];
+      [...fallbackGrid.querySelectorAll('.product-card')].slice(1).forEach(card => card.remove());
+      grids.slice(1).forEach(grid => grid.remove());
+      productCards = [...fallbackGrid.querySelectorAll('.product-card')];
       document.body.classList.add('workout-products-loaded');
-      document.querySelector('#collection .grid').innerHTML = '<p class="col-span-full py-12 text-center text-sm text-stone-500">Fitness products are temporarily unavailable.</p>';
     }
   }
 
