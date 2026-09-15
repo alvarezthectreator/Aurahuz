@@ -1,0 +1,11 @@
+.chart{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(6,minmax(34px,1fr));align-items:end;gap:14px;height:245px;padding:26px 14px 32px;border:1px solid #e2eee5;border-radius:14px;background:linear-gradient(180deg,#fbfefb 0%,#f3faf4 100%);overflow:hidden}
+.chart:before{content:"";position:absolute;z-index:-1;inset:20px 14px 32px;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - 1px),#dbe9df calc(25% - 1px),#dbe9df 25%)}
+.chart .bar-group{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;align-items:end;gap:7px;width:auto;height:100%;min-width:0;position:relative}
+.chart .bar-plot{position:relative;display:flex;align-items:flex-end;justify-content:center;min-height:0;height:100%}
+.chart .bar{display:block;justify-self:center;width:min(100%,42px);min-height:3px;border-radius:9px 9px 3px 3px;background:linear-gradient(180deg,#39b978 0%,#0d693d 100%);box-shadow:0 6px 14px #11643c35;transition:height .25s ease,filter .2s ease}
+.chart .bar:hover{filter:brightness(1.12)}
+.chart .bar.is-empty{background:#bfd6c5;box-shadow:none}
+.chart .bar-value{position:absolute;z-index:1;top:0;max-width:100%;overflow:hidden;color:#155f3a;font-size:10px;font-weight:800;line-height:1;text-overflow:ellipsis;white-space:nowrap}
+.chart .bar-group small{position:static;justify-self:center;transform:none;color:#52675a;font-size:11px;font-weight:700}
+@media(max-width:900px){.chart{height:215px}}
+@media(max-width:460px){.chart{gap:7px;height:210px;padding-left:8px;padding-right:8px}.chart:before{inset-left:8px;inset-right:8px}.chart .bar-value{font-size:9px}.chart .bar-group small{font-size:10px}}

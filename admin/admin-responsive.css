@@ -1,0 +1,45 @@
+.menu-toggle,.sidebar-backdrop{display:none}
+
+@media (max-width:900px){
+  body{overflow-x:hidden}
+  body.sidebar-open{overflow:hidden}
+  .admin-shell{display:block;min-height:100dvh}
+  .sidebar{position:fixed;z-index:100;top:0;left:0;width:min(280px,86vw);height:100dvh;padding:25px 20px 20px;transform:translateX(-105%);transition:transform .22s ease;box-shadow:18px 0 45px #17351d2e;border-right:1px solid var(--line)}
+  body.sidebar-open .sidebar{transform:translateX(0)}
+  .sidebar-backdrop{display:block;position:fixed;z-index:90;inset:0;border:0;background:#10261b75;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
+  body.sidebar-open .sidebar-backdrop{opacity:1;visibility:visible}
+  .sidebar .nav-label,.sidebar .bottom-label{display:block;margin-top:35px}
+  .sidebar .side-nav{display:grid;overflow:visible;margin-top:0}
+  .sidebar .side-nav a{padding:12px 13px}
+  .sidebar .sidebar-foot{display:flex}
+  .workspace{width:100%;padding:22px 18px 36px}
+  .workspace-header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;margin-bottom:27px}
+  .workspace-header>div:first-child{margin:0}
+  .menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #d9dade;border-radius:12px;background:#fff;color:#173320;cursor:pointer}
+  .menu-toggle svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  .global-search{grid-column:1/-1;grid-row:2;width:100%;max-width:none}
+  .profile>span:last-child{display:none}
+  .profile{justify-self:end}
+  .page-heading{align-items:flex-start;flex-direction:column;gap:14px}
+  .page-heading h2{font-size:26px}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .stat-card{min-height:128px;padding:15px}
+  .stat-card>strong{margin-top:23px;font-size:23px}
+  .overview-grid,.product-layout,.payment-layout,.product-side{grid-template-columns:1fr}
+  .card,.table-card,.form-card{padding:19px}
+  .form-grid{grid-template-columns:1fr}
+  .form-grid .full{grid-column:auto}
+  .table-wrap{margin:0 -8px;width:calc(100% + 16px)}
+  .table-wrap table{min-width:680px}
+}
+
+@media (max-width:460px){
+  .workspace{padding:18px 13px 30px}
+  .workspace-header h1{font-size:25px}
+  .global-search{height:43px}
+  .stat-grid{grid-template-columns:1fr}
+  .page-heading h2{font-size:24px}
+  .primary-button,.outline-button{width:100%}
+  .card-heading{align-items:flex-start;flex-direction:column}
+  .settings-card>nav button{padding:10px}
+}

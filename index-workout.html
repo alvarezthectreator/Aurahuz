@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aurahuz — Essence in its purest form</title>
+<title>Aurahuz Fitness — Move with intention</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0e0c0a;
-    --cream:#f6f1e7;
-    --gold:#c9a24a;
-    --gold-light:#e6cd8f;
-    --gold-dim:#a9863a;
-    --stone:#8a8378;
+    --ink:#3a2108;
+    --cream:#fff8e8;
+    --gold:#c97813;
+    --gold-light:#ffe3a0;
+    --gold-dim:#9f5308;
+    --stone:#8c7253;
   }
   body{ margin:0; font-family:'Jost', sans-serif; }
   .font-serif-display{ font-family:'Cormorant Garamond', serif; }
@@ -80,9 +80,22 @@
     color:#241c0c;
   }
   .bottle-shadow{ filter: drop-shadow(0 30px 40px rgba(0,0,0,.55)); }
+  body[data-storefront="fitness"] > .min-h-screen > div{ background:linear-gradient(135deg,#3a2108 0%,#8a4d0c 46%,#d99a2b 100%); }
+  body[data-storefront="fitness"] header,
+  body[data-storefront="fitness"] footer,
+  body[data-storefront="fitness"] #signature{ background:linear-gradient(135deg,#3a2108 0%,#8a4d0c 52%,#c97813 100%) !important; }
+  body[data-storefront="fitness"] #signature > div:first-child{ background:linear-gradient(150deg,#9c5a0f,#e2a83c) !important; }
+  body[data-storefront="fitness"] #journal{ background:linear-gradient(135deg,#6e3908,#d28b1d 72%,#f0c66b) !important; }
+  body[data-storefront="fitness"] .hero-slide + .hero-slide + div{ background:linear-gradient(90deg,rgba(58,33,8,.78),rgba(144,78,10,.42),rgba(231,169,54,.28),rgba(58,33,8,.58)) !important; }
+  body[data-storefront="fitness"] .gold-btn{ background:linear-gradient(110deg,#ffe8a9,#e1a132 52%,#a85908); }
+  body[data-storefront="fitness"] .product-card button{ background:linear-gradient(110deg,#8f4a08,#d18b1d) !important; }
+  body[data-storefront="fitness"] #collection .grid + .grid{ display:none; }
+  body[data-storefront="fitness"] #collection .grid .product-card:not(:first-child){ display:none; }
+  body[data-storefront="fitness"] #collection .grid{ visibility:hidden; }
+  body[data-storefront="fitness"].workout-products-loaded #collection .grid{ visibility:visible; }
 </style>
 </head>
-<body id="top" data-storefront="aurahuz" class="bg-[var(--cream)] text-[var(--ink)]">
+<body id="top" data-storefront="fitness" class="bg-[var(--cream)] text-[var(--ink)]">
 
 <!-- ============ OUTER FRAME ============ -->
 <div class="min-h-screen p-0 md:p-0">
@@ -91,12 +104,12 @@
   <!-- ============ HEADER ============ -->
   <header class="bg-[#0c0a08] border-b border-white/10">
     <div class="max-w-[1440px] mx-auto flex items-center justify-between px-8 md:px-12 py-6">
-      <div class="font-serif-display tracked text-2xl md:text-[26px] text-[var(--gold-light)]">AURAHUZ</div>
+      <div class="font-serif-display tracked text-2xl md:text-[26px] text-[var(--gold-light)]">AURAHUZ FITNESS</div>
 
       <nav class="hidden lg:flex items-center gap-10 text-[12px] tracked-sm text-stone-200">
         <a href="#top" class="pb-2 border-b border-[var(--gold)] text-white">HOME</a>
         <a href="#collection" class="hover:text-white transition-colors">COLLECTION</a>
-        <a href="index-workout.html" class="hover:text-white transition-colors">FITNESS</a>
+        <a href="index.html" class="hover:text-white transition-colors">FASHION</a>
       </nav>
 
       <div class="flex items-center gap-5">
@@ -117,23 +130,23 @@
 
   <!-- ============ HERO ============ -->
   <section class="relative overflow-hidden min-h-[620px] md:min-h-[700px] bg-[#0c0a08]">
-    <div class="hero-slide is-active absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('Create_gold_necklace_hero_section_2K_20260913173539.jpeg');"></div>
+    <div class="hero-slide is-active absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('IMG_7160.JPG_2K_20260915215959.jpeg');"></div>
     <div class="hero-slide absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('IMG_7160.JPG_2K_20260915124110.jpeg');"></div>
     <div class="absolute inset-0 z-10" style="background:linear-gradient(90deg, rgba(12,10,8,0.72) 0%, rgba(12,10,8,0.45) 28%, rgba(12,10,8,0.2) 55%, rgba(12,10,8,0.5) 100%);"></div>
 
     <div class="relative z-20 max-w-[1440px] mx-auto grid lg:grid-cols-[1.2fr_0.8fr] items-center gap-6 px-8 md:px-12 py-16 md:py-20 min-h-[620px] md:min-h-[700px]">
       <!-- Left copy -->
       <div class="relative z-10 max-w-[560px]">
-        <p class="tracked-sm text-[12px] text-[var(--gold)] mb-6">DISCOVER THE COLLECTION</p>
+        <p class="tracked-sm text-[12px] text-[var(--gold)] mb-6">DISCOVER THE FITNESS EDIT</p>
         <h1 class="font-serif-display text-[56px] md:text-[68px] leading-[0.98] text-[#f3ede0]">
-          Style in<br>
-          <span class="italic text-[var(--gold-light)] font-normal">its purest form.</span>
+          Strength in<br>
+          <span class="italic text-[var(--gold-light)] font-normal">every movement.</span>
         </h1>
         <p class="mt-7 max-w-sm text-[15px] leading-relaxed text-stone-300/90">
-          Discover expressive pieces, elevated essentials, and statement details curated to make every entrance your own.
+          Training essentials and everyday tools selected to keep your routine focused, capable, and moving forward.
         </p>
         <a href="#collection" class="gold-btn inline-block mt-9 text-[12px] tracked-sm font-medium px-8 py-4">
-          EXPLORE THE COLLECTION
+          START YOUR ROUTINE
         </a>
 
         <div class="flex items-center gap-3 mt-14 text-[11px] tracked-sm">
@@ -144,7 +157,7 @@
 
       <div class="hidden lg:flex justify-end items-start pt-8">
         <div class="flex flex-col items-end text-right">
-          <p class="tracked-sm text-[12px] text-stone-200 leading-6">DEEP. BOLD.<br>UNFORGETTABLE.</p>
+          <p class="tracked-sm text-[12px] text-stone-200 leading-6">TRAIN SMART.<br>MOVE STRONG.</p>
           <div class="w-10 h-px bg-[var(--gold)] my-4"></div>
           <p class="font-serif-display text-2xl text-[var(--gold-light)] tracking-widest">AN</p>
         </div>
@@ -155,15 +168,15 @@
   <!-- ============ THE COLLECTION ============ -->
   <section id="collection" class="bg-[var(--cream)] py-12 px-6 md:px-10">
     <div class="max-w-[1440px] mx-auto">
-      <h2 class="font-serif-display text-center text-[34px] tracked-sm text-[#221c12] divider-flourish">THE COLLECTION</h2>
+      <h2 class="font-serif-display text-center text-[34px] tracked-sm text-[#221c12] divider-flourish">THE FITNESS EDIT</h2>
 
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-8">
         <article class="product-card bg-white group overflow-hidden shadow-sm">
           <div class="h-44 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Woman lace lingerie" class="w-full object-cover" />
+            <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Fitness training apparel" class="w-full object-cover" />
           </div>
           <div class="px-2.5 py-2.5">
-            <h3 class="font-medium text-[#221c12]">Woman lace lingerie</h3>
+            <h3 class="font-medium text-[#221c12]">Training Apparel</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
               <p class="price font-semibold text-[#221c12]">NGN 25,000.00</p>
               <p class="old-price text-stone-400 line-through mt-1">NGN 30,000.00</p>
@@ -306,10 +319,10 @@
 
         <article class="product-card bg-white group overflow-hidden shadow-sm">
           <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
-            <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Luxury baroque pearl jewelry" class="w-full object-cover" />
+            <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Recovery and mobility gear" class="w-full object-cover" />
           </div>
           <div class="px-3 py-3">
-            <h3 class="font-medium text-[#221c12]">Luxury Baroque Pearl Jewelry</h3>
+            <h3 class="font-medium text-[#221c12]">Recovery Essentials</h3>
             <div class="mt-2 pt-2 border-t border-stone-200">
               <p class="price font-semibold text-[#221c12]">NGN 20,000.00</p>
               <p class="old-price text-stone-400 line-through mt-1">NGN 25,000.00</p>
@@ -328,47 +341,47 @@
 
     <!-- Signature Notes -->
     <div class="px-8 md:px-12 py-16 border-b lg:border-b-0 lg:border-r border-white/10">
-      <p class="tracked-sm text-[11px] text-[var(--gold)]">THE ART OF STYLE</p>
-      <h2 class="font-serif-display text-[34px] text-[#f3ede0] mt-3">Signature Details</h2>
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">THE ART OF PERFORMANCE</p>
+      <h2 class="font-serif-display text-[34px] text-[#f3ede0] mt-3">Built For Better Movement</h2>
 
       <div class="grid grid-cols-5 gap-3 mt-9">
         <div class="text-center">
-          <img src="img/imgi_7_hthejwzb8i.jpg" alt="Statement sunglasses" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">STATEMENT EYEWEAR</p>
-          <p class="text-[10px] text-stone-500 mt-1">Bold &amp; Confident</p>
+          <img src="img/imgi_7_hthejwzb8i.jpg" alt="Training focus gear" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">FOCUS GEAR</p>
+          <p class="text-[10px] text-stone-500 mt-1">Clear &amp; Ready</p>
         </div>
         <div class="text-center">
-          <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Lace lingerie" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">LACE LAYERS</p>
-          <p class="text-[10px] text-stone-500 mt-1">Delicate &amp; Romantic</p>
+          <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Training apparel" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">MOBILITY ESSENTIALS</p>
+          <p class="text-[10px] text-stone-500 mt-1">Light &amp; Flexible</p>
         </div>
         <div class="text-center">
           <img src="img/imgi_3_shbfbfgkft.jpg" alt="Gold tassel necklace" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">GOLD ACCENTS</p>
-          <p class="text-[10px] text-stone-500 mt-1">Rich &amp; Refined</p>
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">CORE TRAINING</p>
+          <p class="text-[10px] text-stone-500 mt-1">Stable &amp; Strong</p>
         </div>
         <div class="text-center">
-          <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Pearl jewelry" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">PEARL FINISHES</p>
-          <p class="text-[10px] text-stone-500 mt-1">Soft &amp; Timeless</p>
+          <img src="img/imgi_10_7lpiy4p5ra.jpg" alt="Recovery gear" class="h-24 w-full object-cover rounded-sm" />
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">RECOVERY MODE</p>
+          <p class="text-[10px] text-stone-500 mt-1">Restore &amp; Repeat</p>
         </div>
         <div class="text-center">
           <img src="img/imgi_1_5vukrz8ghq.jpg" alt="Crystal cut-out dress" class="h-24 w-full object-cover rounded-sm" />
-          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">EVENING GLAMOUR</p>
-          <p class="text-[10px] text-stone-500 mt-1">Daring &amp; Polished</p>
+          <p class="tracked-sm text-[9px] text-stone-200 mt-3 leading-tight">ACTIVE LAYERS</p>
+          <p class="text-[10px] text-stone-500 mt-1">Comfort &amp; Drive</p>
         </div>
       </div>
 
       <button class="mt-10 border border-[var(--gold-dim)] text-[11px] tracked-sm text-stone-200 px-6 py-3 hover:bg-white/5 transition-colors">
-        VIEW ALL DETAILS
+        VIEW TRAINING ESSENTIALS
       </button>
     </div>
 
     <!-- Our Craft -->
     <div id="story" class="px-8 md:px-12 py-16 grid md:grid-cols-2 gap-10 items-start">
       <div>
-        <p class="tracked-sm text-[11px] text-[var(--gold)]">OUR CRAFT</p>
-        <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Confidence in Every Detail</h2>
+        <p class="tracked-sm text-[11px] text-[var(--gold)]">OUR APPROACH</p>
+        <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight">Progress In Every Session</h2>
 
         <div class="mt-9 space-y-7">
           <div class="flex gap-4">
@@ -376,8 +389,8 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">THOUGHTFULLY DESIGNED</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Every silhouette is chosen to make your personal style feel effortless.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">TRAIN WITH INTENTION</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Every essential is chosen to help you stay focused from warm-up to finish.</p>
             </div>
           </div>
           <div class="flex gap-4">
@@ -385,8 +398,8 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">QUALITY MATERIALS</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Selected fabrics, polished finishes, and details made to be noticed.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">MADE TO MOVE</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Reliable materials and considered details built for repeat sessions.</p>
             </div>
           </div>
           <div class="flex gap-4">
@@ -394,8 +407,8 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c2 3 3.5 5.5 3.5 8a3.5 3.5 0 1 1-7 0C8.5 8.5 10 6 12 3Z"/></svg>
             </div>
             <div>
-              <h3 class="tracked-sm text-[12px] text-stone-100">MADE TO BE REMEMBERED</h3>
-              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Statement pieces created for nights out, celebrations, and every entrance.</p>
+              <h3 class="tracked-sm text-[12px] text-stone-100">RECOVER. RESET. RETURN.</h3>
+              <p class="text-[13px] text-stone-400 mt-2 leading-relaxed max-w-xs">Tools and comfort pieces that support the work between your hardest sessions.</p>
             </div>
           </div>
         </div>
@@ -403,7 +416,7 @@
 
       <div class="h-full min-h-[280px] rounded-sm overflow-hidden">
            <img src="img/imgi_4_8t12erdbvw.jpg"
-             alt="Luxury rhinestone body chain" class="w-full h-full object-cover" />
+             alt="Fitness equipment" class="w-full h-full object-cover" />
       </div>
     </div>
   </section>
@@ -414,26 +427,26 @@
     <!-- Gift -->
     <div id="contact" class="bg-[var(--cream)] px-8 md:px-12 py-16 grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">A LOOK TO REMEMBER</p>
-        <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">The Art of Dressing</h2>
+        <p class="tracked-sm text-[11px] text-[var(--gold-dim)]">YOUR NEXT SESSION STARTS HERE</p>
+        <h2 class="font-serif-display text-[30px] text-[#221c12] mt-3 leading-tight">Make Movement A Habit</h2>
         <p class="text-[13px] text-stone-600 mt-4 leading-relaxed max-w-xs">
-          From statement accessories to standout silhouettes, Aurahuz makes getting dressed an unforgettable experience.
+          From warm-up essentials to recovery tools, Aurahuz Fitness helps you show up ready for the work.
         </p>
         <button class="mt-8 border border-[#221c12]/40 text-[11px] tracked-sm px-6 py-3 hover:bg-black/5 transition-colors">
-          SHOP THE EDIT
+          SHOP FITNESS GEAR
         </button>
       </div>
       <div class="h-64 rounded-sm overflow-hidden">
            <img src="img/imgi_10_7lpiy4p5ra.jpg"
-             alt="Luxury baroque pearl jewelry" class="w-full h-full object-cover" />
+             alt="Recovery equipment" class="w-full h-full object-cover" />
       </div>
     </div>
 
     <!-- Testimonial -->
     <div id="journal" class="px-8 md:px-12 py-16 flex flex-col justify-center relative" style="background:radial-gradient(120% 100% at 80% 20%, #1c1712, #0c0a08 70%);">
-      <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY STYLE LOVERS</p>
+      <p class="tracked-sm text-[11px] text-[var(--gold)]">TRUSTED BY PEOPLE WHO TRAIN</p>
       <h2 class="font-serif-display text-[30px] text-[#f3ede0] mt-3 leading-tight max-w-md">
-        Loved by Those Who Dress With Intention
+        Chosen By People Who Keep Showing Up
       </h2>
 
       <div class="flex gap-1 mt-6 text-[var(--gold)]">
@@ -441,7 +454,7 @@
       </div>
 
       <p class="font-serif-display italic text-[19px] text-stone-200 mt-5 max-w-md leading-relaxed">
-        "Every piece feels personal, luxurious, and easy to make your own. Aurahuz has become my favorite place to find a statement look."
+        "The right gear makes it easier to stay consistent. Aurahuz Fitness has become part of my weekly routine."
       </p>
       <p class="tracked-sm text-[11px] text-stone-500 mt-4">— SOPHIA L., LAGOS</p>
 
@@ -508,7 +521,7 @@
         <div>
           <div class="font-serif-display tracked text-3xl text-[var(--gold-light)]">AURAHUZ</div>
           <p class="text-[13px] leading-relaxed text-stone-400 mt-5 max-w-xs">
-            Contemporary fashion and statement details for the way you want to be remembered.
+            Training essentials and recovery tools for the way you want to move.
           </p>
           <div class="flex items-center gap-3 mt-7">
             <a href="https://instagram.com/_aurahus" target="_blank" rel="noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-stone-300 hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">
@@ -528,8 +541,8 @@
           <nav class="mt-5 space-y-3 text-[13px]">
             <a href="#collection" class="block hover:text-white transition-colors">New Arrivals</a>
             <a href="#collection" class="block hover:text-white transition-colors">Best Sellers</a>
-            <a href="#collection" class="block hover:text-white transition-colors">Lingerie</a>
-            <a href="#collection" class="block hover:text-white transition-colors">Accessories</a>
+            <a href="#collection" class="block hover:text-white transition-colors">Training Gear</a>
+            <a href="#collection" class="block hover:text-white transition-colors">Recovery Tools</a>
           </nav>
         </div>
 
@@ -817,8 +830,8 @@
   const accountPanel = document.getElementById('accountPanel');
   const infoPanel = document.getElementById('infoPanel');
   const infoContent = {
-    story: ['OUR STORY', 'Aurahuz curates expressive fashion, elevated essentials, and statement details for people who dress with intention.'],
-    journal: ['THE JOURNAL', 'Explore styling ideas, seasonal edits, and inspiration for making every look distinctly yours.'],
+    story: ['OUR STORY', 'Aurahuz Fitness curates dependable training essentials and recovery tools for people who move with intention.'],
+    journal: ['THE JOURNAL', 'Explore training habits, recovery ideas, and practical inspiration for building a routine that lasts.'],
     contact: ['CONTACT US', 'Reach our customer care team through WhatsApp for product questions, delivery support, and order help.'],
     shipping: ['SHIPPING & DELIVERY', 'Orders are prepared with care and delivered across Nigeria. Delivery timing and fees are confirmed during order processing.'],
     returns: ['RETURNS & EXCHANGES', 'Please review sizes, colors, and product details before ordering. Contact customer care promptly if an item arrives damaged or incorrect.'],
@@ -1015,13 +1028,13 @@
     });
   }
 
-  async function loadCatalog() {
+  async function loadWorkoutProducts() {
+    if (document.body.dataset.storefront !== 'fitness') return;
     try {
-      const storefront = document.body.dataset.storefront || 'aurahuz';
-      const response = await fetch(`api/products.php?storefront=${encodeURIComponent(storefront)}`);
-      if (!response.ok) throw new Error('Unable to load products.');
+      const response = await fetch('api/products.php?storefront=fitness');
+      if (!response.ok) throw new Error('Unable to load fitness products.');
       const result = await response.json();
-      const products = result.data || [];
+      const products = (result.data || []).slice(0, 1);
       const productMarkup = products.map(product => `<article class="product-card bg-white group overflow-hidden shadow-sm" data-product-id="${product.id}">
         <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden"><img src="${product.image}" alt="${product.name}" class="w-full object-cover"></div>
         <div class="px-3 py-3"><h3 class="font-medium text-[#221c12]">${product.name}</h3><div class="mt-2 pt-2 border-t border-stone-200"><p class="price font-semibold text-[#221c12]">NGN ${Number(product.price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>${product.old_price ? `<p class="old-price text-stone-400 line-through mt-1">NGN ${Number(product.old_price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>` : ''}</div><button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">Add To Cart</button></div>
@@ -1031,8 +1044,10 @@
       grids.slice(1).forEach(grid => grid.remove());
       productCards = [...document.querySelectorAll('.product-card')];
       bindProductCards();
+      document.body.classList.add('workout-products-loaded');
     } catch (error) {
-      console.warn(error);
+      document.body.classList.add('workout-products-loaded');
+      document.querySelector('#collection .grid').innerHTML = '<p class="col-span-full py-12 text-center text-sm text-stone-500">Fitness products are temporarily unavailable.</p>';
     }
   }
 
@@ -1063,7 +1078,7 @@
   }
 
   bindProductCards();
-  loadCatalog();
+  loadWorkoutProducts();
   document.getElementById('bagButton').addEventListener('click', openCart);
   document.getElementById('closeCart').addEventListener('click', closeCart);
   cartBackdrop.addEventListener('click', closeCart);

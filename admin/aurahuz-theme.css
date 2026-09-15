@@ -1,0 +1,12 @@
+:root{--ink:#171513;--muted:#77716a;--line:#e7e1d8;--canvas:#f7f5f1;--mint:#d2ab55;--green:#b18a3b;--pale:#f4ead2;--warn:#9b6f25}
+body{background:var(--canvas);color:var(--ink)}
+.sidebar{background:#fff;border-right-color:var(--line)}
+.brand{color:#171513}.brand-mark{background:#171513;color:#d2ab55}
+.side-nav a{color:#4d4943}.side-nav a:hover{background:#f8f1e3}.side-nav a.active{background:#d2ab55;color:#171513}
+.sidebar-foot i{background:#d2ab55}
+.primary-button,.auth-card button{background:#171513;color:#fff}.primary-button:hover,.auth-card button:hover{background:#2a241b}
+.outline-button{border-color:#d2ab55;color:#72551d}.status.approved{background:#f4ead2;color:#72551d}.status.pending{background:#f7edd6;color:#8b641e}
+.chart{border-color:#e7e1d8;background:linear-gradient(180deg,#fff 0%,#f8f2e5 100%)}
+.chart:before{background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - 1px),#eadfc9 calc(25% - 1px),#eadfc9 25%)}
+.chart .bar{background:linear-gradient(180deg,#e2c477 0%,#9a7227 100%);box-shadow:0 6px 14px #9a722733}.chart .bar.is-empty{background:#e8dfcc}.chart .bar-value{color:#72551d}.chart .bar-group small{color:#77716a}
+.auth-page{background:#171513}.auth-card{border-top:3px solid #d2ab55}.eyebrow{color:#9a762e}
