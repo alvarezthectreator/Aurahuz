@@ -2,3 +2,5 @@
 .env
 .env.*
 data/*.log
+config/mail.local.php
+data/receipts/

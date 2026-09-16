@@ -29,9 +29,10 @@ try {
     $email = strtolower(trim((string) ($customer['email'] ?? '')));
     $phone = trim((string) ($customer['phone'] ?? ''));
     $location = trim((string) ($customer['location'] ?? ''));
+    $address = trim((string) ($customer['address'] ?? ''));
     $storefront = trim((string) ($payload['storefront'] ?? 'aurahuz'));
 
-    if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $phone === '' || $location === '' || !in_array($storefront, ['aurahuz', 'fitness'], true) || !is_array($items) || $items === []) {
+    if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $phone === '' || $location === '' || $address === '' || !in_array($storefront, ['aurahuz', 'fitness'], true) || !is_array($items) || $items === []) {
         http_response_code(422);
         throw new InvalidArgumentException('Customer details and at least one product are required.');
     }
@@ -60,15 +61,15 @@ try {
 
     $orderCode = orderCode();
     $orderStatement = $database->prepare(
-        "INSERT INTO orders (order_code, storefront, customer_name, customer_email, customer_phone, delivery_location, total, payment_method, payment_status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, 'bank_transfer', 'awaiting_payment')"
+         "INSERT INTO orders (order_code, storefront, customer_name, customer_email, customer_phone, delivery_location, delivery_address, total, payment_method, payment_status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'bank_transfer', 'awaiting_payment')"
     );
-        $orderStatement->execute([$orderCode, $storefront, $name, $email, $phone, $location, $total]);
+        $orderStatement->execute([$orderCode, $storefront, $name, $email, $phone, $location, $address, $total]);
     $orderId = (int) $database->lastInsertId();
 
-    $itemStatement = $database->prepare('INSERT INTO order_items (order_id, product_id, product_name, quantity, unit_price) VALUES (?, ?, ?, ?, ?)');
+    $itemStatement = $database->prepare('INSERT INTO order_items (order_id, product_id, product_name, quantity, unit_price, line_total) VALUES (?, ?, ?, ?, ?, ?)');
     foreach ($orderItems as [$productId, $productName, $quantity, $unitPrice]) {
-        $itemStatement->execute([$orderId, $productId, $productName, $quantity, $unitPrice]);
+        $itemStatement->execute([$orderId, $productId, $productName, $quantity, $unitPrice, $unitPrice * $quantity]);
     }
 
     $database->commit();
