@@ -18,20 +18,20 @@
   }
   body{ margin:0; font-family:'Jost', sans-serif; }
   .font-serif-display{ font-family:'Cormorant Garamond', serif; }
-  .product-card{ border-radius:18px; }
-  .product-card > div:first-child{ height:auto !important; aspect-ratio:1 / 1; }
-  .product-card > div:last-child{ padding:.625rem .625rem; }
+  .product-card{ border-radius:12px; }
+  .product-card > div:first-child{ width:100%; height:auto !important; aspect-ratio:1 / 1; min-height:0; }
+  .product-card > div:last-child{ padding:.5rem; }
   .product-card{ animation:card-enter .55s cubic-bezier(.22,1,.36,1) both; }
   .product-card:nth-child(2){ animation-delay:.06s; }
   .product-card:nth-child(3){ animation-delay:.12s; }
   .product-card:nth-child(4){ animation-delay:.18s; }
   .product-card:nth-child(5){ animation-delay:.24s; }
-  .product-card img{ height:100%; transition:transform .5s cubic-bezier(.22,1,.36,1); }
-  .product-card:hover img{ transform:scale(1.06); }
-  .product-card h3{ font-size:11px; line-height:1.4; }
-  .product-card .price{ font-size:13px; }
+  .product-card img{ width:100%; aspect-ratio:1 / 1; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.22,1,.36,1); }
+  .product-card:hover img{ transform:scale(1.08); }
+  .product-card h3{ font-size:10px; line-height:1.35; }
+  .product-card .price{ font-size:11px; }
   .product-card .old-price{ font-size:10px; }
-  .product-card button{ font-size:10px; padding-top:0.55rem; padding-bottom:0.55rem; transition:transform .2s ease, background-color .2s ease; }
+  .product-card button{ font-size:9px; padding-top:0.45rem; padding-bottom:0.45rem; transition:transform .2s ease, background-color .2s ease; }
   .product-card button:hover{ transform:translateY(-1px); }
   @keyframes card-enter{
     from{ opacity:0; transform:translateY(18px); }
@@ -164,10 +164,10 @@
 
   <!-- ============ THE COLLECTION ============ -->
   <section id="collection" class="bg-[var(--cream)] py-12 px-6 md:px-10">
-    <div class="max-w-[1440px] mx-auto">
+    <div class="max-w-[1160px] mx-auto">
       <h2 class="font-serif-display text-center text-[34px] tracked-sm text-[#221c12] divider-flourish">THE COLLECTION</h2>
 
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-8">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-12 mt-8">
         <article class="product-card bg-white group overflow-hidden shadow-sm">
           <div class="h-44 flex items-center justify-center bg-[#efe9db] overflow-hidden">
             <img src="img/imgi_5_b9ffrjjqkm.jpg" alt="Woman lace lingerie" class="w-full object-cover" />
@@ -249,7 +249,7 @@
         </article>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-8">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-12 mt-12">
         <article class="product-card bg-white group overflow-hidden shadow-sm">
           <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden">
             <img src="img/imgi_3_shbfbfgkft.jpg" alt="Luxe spiral tassel necklace" class="w-full object-cover" />
@@ -329,6 +329,13 @@
             </button>
           </div>
         </article>
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <a href="collection.html" class="gold-btn inline-flex items-center gap-3 px-8 py-4 text-[11px] font-medium tracked-sm">
+          VIEW MORE
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -663,7 +670,7 @@
           <h2 class="mb-4 text-sm font-semibold">Payment method</h2>
           <div class="flex items-center gap-3 rounded-lg border border-[#002522] bg-stone-50 px-4 py-4 text-sm"><span class="flex h-4 w-4 items-center justify-center rounded-full border border-[#002522]"><span class="h-2 w-2 rounded-full bg-[#002522]"></span></span> Bank transfer</div>
         </section>
-        <button class="w-full rounded-xl bg-[#002522] py-4 text-[11px] text-white hover:bg-[#003c36]">Place Order</button>
+        <button type="submit" class="w-full rounded-xl bg-[#002522] py-4 text-[11px] text-white hover:bg-[#003c36]">Place Order</button>
       </form>
 
       <aside class="h-fit rounded-2xl bg-stone-50 p-6">
@@ -993,7 +1000,7 @@
     document.getElementById('paymentItems').innerHTML = cart.map(item => `
       <div class="flex items-center gap-3"><img src="${item.image}" alt="${item.title}" class="h-12 w-12 rounded-lg object-cover"><div class="min-w-0 flex-1"><p class="truncate text-xs font-semibold">${item.title}</p><p class="mt-1 text-[11px] text-stone-500">Qty ${item.quantity}</p></div><span class="text-xs font-semibold">${money(item.numericPrice * item.quantity)}</span></div>`).join('');
     document.getElementById('paymentTotal').textContent = subtotal;
-    document.getElementById('paymentButtonTotal').textContent = subtotal;
+    document.getElementById('paymentButtonTotal')?.replaceChildren(subtotal);
   }
 
   function openCart() {
@@ -1048,7 +1055,7 @@
       const response = await fetch(`api/products.php?storefront=${encodeURIComponent(storefront)}`);
       if (!response.ok) throw new Error('Unable to load products.');
       const result = await response.json();
-      const products = result.data || [];
+      const products = (result.data || []).slice(0, 10);
       const productMarkup = products.map(product => `<article class="product-card bg-white group overflow-hidden shadow-sm" data-product-id="${product.id}">
         <div class="h-52 flex items-center justify-center bg-[#efe9db] overflow-hidden"><img src="${product.image}" alt="${product.name}" class="w-full object-cover"></div>
         <div class="px-3 py-3"><h3 class="font-medium text-[#221c12]">${product.name}</h3><div class="mt-2 pt-2 border-t border-stone-200"><p class="price font-semibold text-[#221c12]">NGN ${Number(product.price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>${product.old_price ? `<p class="old-price text-stone-400 line-through mt-1">NGN ${Number(product.old_price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>` : ''}</div><button class="mt-3 w-full bg-[#221c12] text-white tracked-sm rounded-full hover:bg-[#0c0a08] transition-colors">Add To Cart</button></div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurahuz Collection</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f6f1e7;color:#221c12;font-family:'Jost',sans-serif}
+  .display{font-family:'Cormorant Garamond',serif}
+  .product-card{border-radius:12px;animation:enter .45s ease both}
+  .product-card img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+  .product-card:hover img{transform:scale(1.08)}
+  .product-card button{background:#221c12;color:#fff}
+  @keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @media(prefers-reduced-motion:reduce){.product-card{animation:none}.product-card img{transition:none}}
+</style>
+</head>
+<body>
+<header class="border-b border-black/10 bg-[#0c0a08] text-white">
+  <div class="mx-auto flex max-w-[1160px] items-center justify-between px-6 py-5">
+    <a href="index.html" class="display text-2xl tracking-[.18em] text-[#e6cd8f]">AURAHUZ</a>
+    <nav class="flex items-center gap-5 text-[11px] tracking-[.12em]">
+      <a href="index.html" class="hover:text-[#e6cd8f]">HOME</a>
+      <a href="index-workout.html" class="hover:text-[#e6cd8f]">FITNESS</a>
+    </nav>
+  </div>
+</header>
+<main class="mx-auto max-w-[1160px] px-6 py-12 md:px-8">
+  <div class="flex flex-col justify-between gap-4 border-b border-[#c9a24a]/40 pb-7 sm:flex-row sm:items-end">
+    <div>
+      <p class="text-[11px] font-medium tracking-[.18em] text-[#a9863a]">AURAHUZ FASHION</p>
+      <h1 class="display mt-2 text-5xl">The Collection</h1>
+    </div>
+    <p class="max-w-sm text-sm leading-relaxed text-stone-600">Statement details and elevated essentials chosen for your next entrance.</p>
+  </div>
+  <div id="collectionGrid" class="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"></div>
+  <p id="collectionMessage" class="py-16 text-center text-sm text-stone-500">Loading collection...</p>
+</main>
+<script>
+  const grid = document.getElementById('collectionGrid');
+  const message = document.getElementById('collectionMessage');
+  fetch('api/products.php?storefront=aurahuz')
+    .then(response => {
+      if (!response.ok) throw new Error('Unable to load collection.');
+      return response.json();
+    })
+    .then(result => {
+      const products = result.data || [];
+      message.textContent = products.length ? '' : 'No products are available right now.';
+      grid.innerHTML = products.map(product => `<article class="product-card overflow-hidden bg-white shadow-sm">
+        <img src="${product.image}" alt="${product.name}">
+        <div class="p-3"><h2 class="text-[11px] font-medium leading-snug">${product.name}</h2>
+        <p class="mt-2 text-xs font-semibold">NGN ${Number(product.price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>
+        ${product.old_price ? `<p class="mt-1 text-[10px] text-stone-400 line-through">NGN ${Number(product.old_price).toLocaleString('en-NG', {minimumFractionDigits: 2})}</p>` : ''}
+        </div></article>`).join('');
+    })
+    .catch(() => { message.textContent = 'The collection is temporarily unavailable.'; });
+</script>
+</body>
+</html>

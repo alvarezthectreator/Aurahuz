@@ -26,8 +26,8 @@
   .product-card:nth-child(3){ animation-delay:.12s; }
   .product-card:nth-child(4){ animation-delay:.18s; }
   .product-card:nth-child(5){ animation-delay:.24s; }
-  .product-card img{ height:100%; transition:transform .5s cubic-bezier(.22,1,.36,1); }
-  .product-card:hover img{ transform:scale(1.06); }
+  .product-card img{ height:100%; transition:transform .6s cubic-bezier(.22,1,.36,1); }
+  .product-card:hover img{ transform:scale(1.08); }
   .product-card h3{ font-size:11px; line-height:1.4; }
   .product-card .price{ font-size:13px; }
   .product-card .old-price{ font-size:10px; }
@@ -674,7 +674,7 @@
           <h2 class="mb-4 text-sm font-semibold">Payment method</h2>
           <div class="flex items-center gap-3 rounded-lg border border-[#002522] bg-stone-50 px-4 py-4 text-sm"><span class="flex h-4 w-4 items-center justify-center rounded-full border border-[#002522]"><span class="h-2 w-2 rounded-full bg-[#002522]"></span></span> Bank transfer</div>
         </section>
-        <button class="w-full rounded-xl bg-[#002522] py-4 text-[11px] text-white hover:bg-[#003c36]">Place Order</button>
+        <button type="submit" class="w-full rounded-xl bg-[#002522] py-4 text-[11px] text-white hover:bg-[#003c36]">Place Order</button>
       </form>
 
       <aside class="h-fit rounded-2xl bg-stone-50 p-6">
@@ -1005,7 +1005,7 @@
     document.getElementById('paymentItems').innerHTML = cart.map(item => `
       <div class="flex items-center gap-3"><img src="${item.image}" alt="${item.title}" class="h-12 w-12 rounded-lg object-cover"><div class="min-w-0 flex-1"><p class="truncate text-xs font-semibold">${item.title}</p><p class="mt-1 text-[11px] text-stone-500">Qty ${item.quantity}</p></div><span class="text-xs font-semibold">${money(item.numericPrice * item.quantity)}</span></div>`).join('');
     document.getElementById('paymentTotal').textContent = subtotal;
-    document.getElementById('paymentButtonTotal').textContent = subtotal;
+    document.getElementById('paymentButtonTotal')?.replaceChildren(subtotal);
   }
 
   function openCart() {
