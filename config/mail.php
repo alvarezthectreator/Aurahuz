@@ -9,8 +9,8 @@ $config = [
     'encryption' => getenv('AURAHUZ_SMTP_ENCRYPTION') ?: 'ssl',
     'from_email' => getenv('AURAHUZ_MAIL_FROM') ?: '',
     'from_name' => getenv('AURAHUZ_MAIL_FROM_NAME') ?: 'Aurahuz',
-    'admin_email' => getenv('AURAHUZ_ADMIN_EMAIL') ?: '',
-    'support_email' => getenv('AURAHUZ_SUPPORT_EMAIL') ?: '',
+    'admin_email' => getenv('AURAHUZ_ADMIN_EMAIL') ?: 'wagwulageorge@gmail.com',
+    'support_email' => getenv('AURAHUZ_SUPPORT_EMAIL') ?: 'wagwulageorge@gmail.com',
     'base_url' => rtrim((string) (getenv('AURAHUZ_BASE_URL') ?: ''), '/')
 ];
 
