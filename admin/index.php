@@ -58,7 +58,7 @@ function orderStatus(string $status): string { [$style,$label] = state($status);
 <link rel="stylesheet" href="admin-responsive.css">
 <link rel="stylesheet" href="admin-dashboard.css">
 <link rel="stylesheet" href="aurahuz-theme.css">
-<style>.receipt-link{display:block;width:max-content;margin-top:7px;color:#247b50;font-size:11px;font-weight:700;text-decoration:none}.receipt-link:hover{text-decoration:underline}</style>
+<style>.receipt-link{display:block;width:max-content;margin-top:7px;color:#247b50;font-size:11px;font-weight:700;text-decoration:none}.receipt-link:hover{text-decoration:underline}.delete-order-button{margin-top:8px;padding:6px 9px;border:1px solid #e3b9b3;border-radius:6px;background:#fff7f6;color:#a33b30;font:700 11px inherit;cursor:pointer}.delete-order-button:hover{background:#fbe9e6}</style>
 </head>
 <body>
 <div class="admin-shell">
@@ -595,6 +595,7 @@ function orderStatus(string $status): string { [$style,$label] = state($status);
 <th>Date</th>
 <th>Total</th>
 <th>Payment status</th>
+<th>Actions</th>
 </tr>
 </thead>
 <tbody>
@@ -637,6 +638,15 @@ function orderStatus(string $status): string { [$style,$label] = state($status);
 <?php if($order['receipt_path']): ?>
 <a class="receipt-link" href="receipt.php?order=<?= (int)$order['id'] ?>" target="_blank" rel="noopener">View receipt</a>
 <?php endif; ?>
+</td>
+<td>
+<form method="post" action="actions.php" onsubmit="return confirm('Delete order <?= adminEscape($order['order_code']) ?>? This cannot be undone.')">
+<input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+<input type="hidden" name="action" value="delete_order">
+<input type="hidden" name="order_id" value="<?= (int)$order['id'] ?>">
+<input type="hidden" name="return_view" value="orders">
+<button class="delete-order-button" type="submit">Delete</button>
+</form>
 </td>
 </tr>
 <?php endforeach; ?>

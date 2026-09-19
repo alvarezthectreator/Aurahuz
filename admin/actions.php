@@ -6,7 +6,7 @@ requireAdmin();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') adminRedirect('index.php');
 verifyCsrf();
 $returnView = (string) ($_POST['return_view'] ?? 'overview');
-if (!in_array($returnView, ['overview', 'products', 'payments'], true)) $returnView = 'overview';
+if (!in_array($returnView, ['overview', 'products', 'orders', 'payments'], true)) $returnView = 'overview';
 
 function productId(string $value): string
 {
@@ -111,6 +111,18 @@ try {
     } elseif ($action === 'delete_product') {
         $database->prepare('DELETE FROM products WHERE id = ?')->execute([productId((string) ($_POST['product_id'] ?? ''))]);
         setFlash('Product deleted.');
+    } elseif ($action === 'delete_order') {
+        $orderId = (int) ($_POST['order_id'] ?? 0);
+        if ($orderId < 1) throw new InvalidArgumentException('Order not found.');
+        $orderStatement = $database->prepare('SELECT receipt_path FROM orders WHERE id = ?');
+        $orderStatement->execute([$orderId]);
+        $order = $orderStatement->fetch();
+        if (!$order) throw new InvalidArgumentException('Order not found.');
+        $database->prepare('DELETE FROM orders WHERE id = ?')->execute([$orderId]);
+        $receiptPath = dirname(__DIR__) . '/' . ltrim((string) ($order['receipt_path'] ?? ''), '/');
+        $receiptDirectory = dirname(__DIR__) . '/data/receipts/';
+        if (str_starts_with($receiptPath, $receiptDirectory) && is_file($receiptPath)) @unlink($receiptPath);
+        setFlash('Order deleted.');
     } elseif ($action === 'create_bank_account') {
         $database->prepare('INSERT INTO bank_accounts (bank_name, account_name, account_number, instructions, is_active) VALUES (?, ?, ?, ?, ?)')->execute([
             trim((string) ($_POST['bank_name'] ?? '')), trim((string) ($_POST['account_name'] ?? '')), trim((string) ($_POST['account_number'] ?? '')), trim((string) ($_POST['instructions'] ?? '')), isset($_POST['is_active']) ? 1 : 0

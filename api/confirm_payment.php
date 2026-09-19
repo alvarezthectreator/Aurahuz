@@ -56,17 +56,15 @@ try {
     require_once __DIR__ . '/smtp_mailer.php';
     $mailConfig = require dirname(__DIR__) . '/config/mail.php';
     $mailer = new SmtpMailer($mailConfig);
-    $scriptDirectory = rtrim(str_replace('\\', '/', dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/api/confirm_payment.php'))), '/');
-    $projectPath = preg_replace('#/api$#', '', $scriptDirectory) ?: '';
-    $baseUrl = $mailConfig['base_url'] ?: ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $projectPath);
-    $approvalUrl = rtrim($baseUrl, '/') . '/api/approve_payment.php?order=' . rawurlencode($orderCode) . '&token=' . rawurlencode($approvalToken);
     $name = htmlspecialchars((string) $order['customer_name'], ENT_QUOTES, 'UTF-8');
     $safeCode = htmlspecialchars($orderCode, ENT_QUOTES, 'UTF-8');
     $total = 'NGN ' . number_format((float) $order['total'], 2);
-    $customerHtml = '<h2>Payment receipt received</h2><p>Hello ' . $name . ', we received your payment receipt for order <strong>' . $safeCode . '</strong>.</p><p>Total: <strong>' . $total . '</strong></p><p>We will review the receipt and email you when the order is approved.</p>';
-    $mailStatus['customer'] = $mailer->send((string) $order['customer_email'], 'Aurahuz payment receipt received', $customerHtml, 'We received your payment receipt for order ' . $orderCode . '.') ? 'MAIL_SENT' : $mailer->errorCode();
-    $adminHtml = '<h2>Payment review required</h2><p>Order <strong>' . $safeCode . '</strong> from ' . $name . ' has a receipt awaiting review.</p><p>Total: <strong>' . $total . '</strong></p><p><a href="' . htmlspecialchars($approvalUrl, ENT_QUOTES, 'UTF-8') . '">Approve payment</a></p>';
-    $adminStatus = $mailer->send((string) $mailConfig['admin_email'], 'Aurahuz payment review: ' . $orderCode, $adminHtml, 'Approve payment for ' . $orderCode . ': ' . $approvalUrl, [['path' => $receiptPath, 'name' => basename((string) $receipt['name']), 'mime' => $mime]]);
+    $approvalUrl = rtrim((string) ($mailConfig['base_url'] ?? ''), '/') . '/api/approve_payment.php?order=' . rawurlencode($orderCode) . '&token=' . rawurlencode($approvalToken);
+    $safeApprovalUrl = htmlspecialchars($approvalUrl, ENT_QUOTES, 'UTF-8');
+    $customerHtml = aurahuzEmailTemplate('PAYMENT RECEIPT RECEIVED', 'Thanks, ' . $name, '<p style="margin:0 0 16px">We received your payment receipt for order <strong style="color:#26382d">' . $safeCode . '</strong>. We are reviewing it now and will email you as soon as your order is confirmed.</p><div style="padding:14px 12px;background:#f2f6f0;border-radius:10px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#78857c">Order total <strong style="float:right;color:#26382d;font-size:14px;letter-spacing:0;text-transform:none">' . $total . '</strong></div>');
+    $mailStatus['customer'] = $mailer->send((string) $order['customer_email'], 'Order update ' . $orderCode, $customerHtml, 'Your payment receipt for order ' . $orderCode . ' has been received.') ? 'MAIL_SENT' : $mailer->errorCode();
+    $adminHtml = aurahuzEmailTemplate('PAYMENT RECEIPT RECEIVED', 'Payment confirmation pending', '<p style="margin:0 0 16px">A payment receipt was submitted for order <strong style="color:#26382d">' . $safeCode . '</strong>.</p><p style="margin:0 0 16px">Customer: <strong style="color:#26382d">' . $name . '</strong></p><div style="padding:14px 12px;background:#f2f6f0;border-radius:10px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#78857c">Order total <strong style="float:right;color:#26382d;font-size:14px;letter-spacing:0;text-transform:none">' . $total . '</strong></div><p style="margin:20px 0 0"><a href="' . $safeApprovalUrl . '" style="display:inline-block;padding:13px 18px;border-radius:8px;background:#0d4b34;color:#fff;font-size:12px;font-weight:700;text-decoration:none">Approve order</a></p><p style="margin:14px 0 0;font-size:11px;color:#849087">Use this button after checking the payment receipt. Approval will mark the order as paid and send the customer a confirmation email.</p>');
+    $adminStatus = $mailer->send((string) $mailConfig['admin_email'], 'Order update ' . $orderCode, $adminHtml, 'A payment receipt was submitted for order ' . $orderCode . '. Please review the order in the Aurahuz admin area.');
     $mailStatus['admin'] = $adminStatus ? 'MAIL_SENT' : $mailer->errorCode();
 } catch (Throwable $exception) {
     error_log('Aurahuz payment mail failed: ' . $exception->getMessage());

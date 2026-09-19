@@ -43,7 +43,7 @@ try {
     $mailer = new SmtpMailer($mailConfig);
     $name = htmlspecialchars((string) $order['customer_name'], ENT_QUOTES, 'UTF-8');
     $total = 'NGN ' . number_format((float) $order['total'], 2);
-    $html = '<h2>Order confirmed</h2><p>Hello ' . $name . ', your payment for order <strong>' . htmlspecialchars($orderCode, ENT_QUOTES, 'UTF-8') . '</strong> has been approved.</p><p>Amount paid: <strong>' . $total . '</strong></p><p>We will contact you about delivery.</p>';
+    $html = aurahuzEmailTemplate('PAYMENT CONFIRMED', 'Thanks, ' . $name, '<p style="margin:0 0 16px">Your payment for order <strong style="color:#26382d">' . htmlspecialchars($orderCode, ENT_QUOTES, 'UTF-8') . '</strong> has been approved.</p><div style="padding:14px 12px;background:#f2f6f0;border-radius:10px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#78857c">Amount paid <strong style="float:right;color:#26382d;font-size:14px;letter-spacing:0;text-transform:none">' . $total . '</strong></div><p style="margin:16px 0 0">We will contact you about delivery.</p>');
     $mailer->send((string) $order['customer_email'], 'Aurahuz order confirmed: ' . $orderCode, $html, 'Your Aurahuz order ' . $orderCode . ' has been confirmed.');
 } catch (Throwable $exception) {
     error_log('Aurahuz confirmation mail failed: ' . $exception->getMessage());
